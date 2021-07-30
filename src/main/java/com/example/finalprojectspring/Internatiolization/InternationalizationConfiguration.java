@@ -22,7 +22,7 @@ public class InternationalizationConfiguration implements WebMvcConfigurer {
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor(){
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
+        lci.setParamName("lan");
         return lci;
     }
 
