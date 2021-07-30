@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GeneralPageController {
 
-    @RequestMapping({"main","/","general"})
+    @RequestMapping({"main","/"})
     public String mainPage(){
         return "general_page";
     }
