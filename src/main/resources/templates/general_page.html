@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>General Page</title>
 </head>
 <body>
-<p>Hello World</p>
+<h1 th:text="#{message.general}"></h1>
+
+<span th:text="#{lang.change}"></span>:
+<button><a href="/main?lang=ua">UA </a></button>
+<button><a href="/main?lang=en">EN</a></button>
+
+<p><a href="/main/login" th:text="#{message.login}"></a> </p>
+<p><a href="/main/registration" th:text="#{message.registration}"></a> </p>
 </body>
 </html>
