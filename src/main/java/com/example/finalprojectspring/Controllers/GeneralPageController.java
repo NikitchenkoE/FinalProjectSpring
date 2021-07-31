@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GeneralPageController {
 
-    @RequestMapping({"main","/","general"})
-    public String mainPage(){
+    @RequestMapping({"main", "/"})
+    public String mainPage() {
         return "general_page";
     }
 
     @RequestMapping("main/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login_page";
     }
 
     @RequestMapping("main/registration")
-    public String registrationForm(){
+    public String registrationForm() {
         return "reg_form_page";
     }
 }
