@@ -1,26 +1,42 @@
 package com.example.finalprojectspring.Entities;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.Set;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 @Entity
-@Table(name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames={"email"}),
-                @UniqueConstraint(columnNames={"phone_number"})})
+@Table(name = "usr",
+        uniqueConstraints = {@UniqueConstraint(columnNames={"email"})})
 public class UserEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
     private Long ID;
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-    @Column(name = "email", nullable = false)
+
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
-    @Column(name = "phone_number", nullable = false)
-    private String phone;
-    @Column(name = "role")
+
+    @Column(nullable = false, length = 64)
+    private String password;
+
+    @Column(name = "first_name", nullable = false, length = 20)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 20)
+    private String lastName;
+
+    @Column(name = "user_role")
+    @ElementCollection(targetClass = Role_Of_Users.class,fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name="user_id"))
     @Enumerated(EnumType.STRING)
-    private Role_Of_Users role;
+    private Set<Role_Of_Users> roles;
 
 }
