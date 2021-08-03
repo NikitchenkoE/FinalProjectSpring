@@ -1,8 +1,10 @@
 package com.example.finalprojectspring.Controllers;
 
+import com.example.finalprojectspring.DTO.UserEntityDTO;
 import com.example.finalprojectspring.Entities.Role_Of_Users;
 import com.example.finalprojectspring.Entities.UserEntity;
 import com.example.finalprojectspring.Repository.UserRepository;
+import com.example.finalprojectspring.Service.IRegistrationInterf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,11 @@ import java.util.Collections;
 @Controller
 public class RegistrationController {
 
-  private final UserRepository userRepository;
+private final IRegistrationInterf iRegistrationInterf;
 
     @Autowired
-    public RegistrationController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public RegistrationController(IRegistrationInterf iRegistrationInterf) {
+        this.iRegistrationInterf = iRegistrationInterf;
     }
 
     @GetMapping("/registration")
@@ -29,9 +31,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/process_register")
-    public String processRegister(UserEntity user) {
+    public String processRegister(UserEntityDTO user) {
         user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
-        userRepository.save(user);
+        iRegistrationInterf.addUserToDataBase(user);
 
         return "login_page";
     }
