@@ -32,7 +32,7 @@ private final IRegistrationInterf iRegistrationInterf;
 
     @PostMapping("/process_register")
     public String processRegister(UserEntityDTO user) {
-        user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
+        user.setRoles(Collections.singleton(Role_Of_Users.USER));
         iRegistrationInterf.addUserToDataBase(user);
 
         return "login_page";
