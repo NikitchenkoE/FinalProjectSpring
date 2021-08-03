@@ -1,7 +1,14 @@
 package com.example.finalprojectspring.Entities;
 
-public enum Role_Of_Users {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role_Of_Users implements GrantedAuthority {
     ADMIN,
     USER,
     MASTER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

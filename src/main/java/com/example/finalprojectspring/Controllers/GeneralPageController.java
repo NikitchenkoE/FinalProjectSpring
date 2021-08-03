@@ -18,5 +18,10 @@ public class GeneralPageController {
         return "login_page";
     }
 
+    @RequestMapping("/user_page")
+    public String userPage(){
+        return "user_page";
+    }
+
 
 }
