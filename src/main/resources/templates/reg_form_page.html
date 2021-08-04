@@ -1,21 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="ISO-8859-1">
     <title>Sign Up </title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Beauty Salon</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{~/main}" th:text="#{message.general.home}">
+                        <i class="fa fa-home" ></i>Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" href="#" th:text="#{message.registration}" th:href="@{~/registration}"><i
+                            class="fa fa-home"></i>Registration</a>
+                </li>
+
+            </ul>
+
+            <div class="col-form-label">
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/registration?lang=ua">UA </a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/registration?lang=en">EN</a></button>
+                <button sec:authorize="isAnonymous()"
+                        class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
+                    <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i class="fa fa-home"></i>Login</a>
+                </button>
+            </div>
+
+            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm"
+                        type="submit" th:text="#{message.logout}">Logout
+                </button>
+            </form>
+
+        </div>
+    </nav>
+</div>
+
+
+
 <div class="container text-center">
+
     <div>
         <h1 th:text="#{message.login.registration}">Registration</h1>
     </div>
 
-    <div><span th:text="#{lang.change}"></span>:
-        <button ><a href="/registration?lang=ua">UA </a></button>
-        <button ><a href="/registration?lang=en">EN</a></button></div>
 
     <form th:action="@{/process_register}" th:object="${user}"
           method="post" style="max-width: 600px; margin: 0 auto;">
@@ -23,7 +61,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label" th:text="#{message.input.email}">E-mail: </label>
                 <div class="col-8">
-                    <input type="email" th:field="*{email}" class="form-control" required />
+                    <input type="email" th:field="*{email}" class="form-control" required/>
                 </div>
             </div>
 
@@ -47,7 +85,7 @@
                 <label class="col-4 col-form-label" th:text="#{message.input.lastname}">Last Name: </label>
                 <div class="col-8">
                     <input type="text" th:field="*{lastName}" class="form-control"
-                           required minlength="2" maxlength="20" />
+                           required minlength="2" maxlength="20"/>
                 </div>
             </div>
 
