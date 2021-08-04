@@ -1,8 +1,8 @@
-package com.example.finalprojectspring.Service;
+package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.DTO.UserEntityDTO;
-import com.example.finalprojectspring.Entities.UserEntity;
-import com.example.finalprojectspring.Repository.UserRepository;
+import com.example.finalprojectspring.dto.UserEntityDTO;
+import com.example.finalprojectspring.entities.UserEntity;
+import com.example.finalprojectspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

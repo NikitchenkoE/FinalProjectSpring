@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.Internatiolization;
+package com.example.finalprojectspring.internatiolization;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

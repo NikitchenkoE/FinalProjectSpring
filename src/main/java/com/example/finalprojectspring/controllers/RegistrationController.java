@@ -1,10 +1,9 @@
-package com.example.finalprojectspring.Controllers;
+package com.example.finalprojectspring.controllers;
 
-import com.example.finalprojectspring.DTO.UserEntityDTO;
-import com.example.finalprojectspring.Entities.Role_Of_Users;
-import com.example.finalprojectspring.Entities.UserEntity;
-import com.example.finalprojectspring.Repository.UserRepository;
-import com.example.finalprojectspring.Service.IRegistrationInterf;
+import com.example.finalprojectspring.dto.UserEntityDTO;
+import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.UserEntity;
+import com.example.finalprojectspring.service.IRegistrationInterf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

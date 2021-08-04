@@ -1,10 +1,9 @@
-package com.example.finalprojectspring.DTO;
+package com.example.finalprojectspring.dto;
 
-import com.example.finalprojectspring.Entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Getter

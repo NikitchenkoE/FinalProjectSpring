@@ -1,6 +1,6 @@
-package com.example.finalprojectspring.SecurityConfiguration;
+package com.example.finalprojectspring.securityConfiguration;
 
-import com.example.finalprojectspring.Entities.UserEntity;
+import com.example.finalprojectspring.entities.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

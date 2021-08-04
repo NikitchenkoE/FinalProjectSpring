@@ -1,6 +1,6 @@
-package com.example.finalprojectspring.Repository;
+package com.example.finalprojectspring.repository;
 
-import com.example.finalprojectspring.Entities.UserEntity;
+import com.example.finalprojectspring.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

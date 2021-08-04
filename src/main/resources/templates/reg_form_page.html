@@ -14,8 +14,8 @@
     </div>
 
     <div><span th:text="#{lang.change}"></span>:
-        <button class="btn btn-primary"><a href="/login?lang=ua">UA </a></button>
-        <button class="btn btn-primary"><a href="/login?lang=en">EN</a></button></div>
+        <button ><a href="/registration?lang=ua">UA </a></button>
+        <button ><a href="/registration?lang=en">EN</a></button></div>
 
     <form th:action="@{/process_register}" th:object="${user}"
           method="post" style="max-width: 600px; margin: 0 auto;">

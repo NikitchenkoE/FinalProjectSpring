@@ -1,8 +1,7 @@
-package com.example.finalprojectspring.Controllers;
+package com.example.finalprojectspring.controllers;
 
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,6 +20,16 @@ public class GeneralPageController {
     @RequestMapping("/user_page")
     public String userPage(){
         return "user_page";
+    }
+
+    @RequestMapping("/admin_page")
+    public String adminPage(){
+        return "admin_page";
+    }
+
+    @RequestMapping("/master_page")
+    public String masterPage(){
+        return "master_page";
     }
 
 

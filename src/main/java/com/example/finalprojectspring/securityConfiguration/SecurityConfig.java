@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.SecurityConfiguration;
+package com.example.finalprojectspring.securityConfiguration;
 
 
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)  {
-        auth.authenticationProvider(authenticationProvider());
+        auth.authenticationProvider(authentication());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider authentication() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(this.userPrincipalsDetailsService);

@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.Entities;
+package com.example.finalprojectspring.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
