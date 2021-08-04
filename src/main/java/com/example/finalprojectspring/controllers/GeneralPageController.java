@@ -17,17 +17,17 @@ public class GeneralPageController {
         return "login_page";
     }
 
-    @RequestMapping("/user_page")
+    @RequestMapping("/user")
     public String userPage(){
         return "user_page";
     }
 
-    @RequestMapping("/admin_page")
+    @RequestMapping("/admin")
     public String adminPage(){
         return "admin_page";
     }
 
-    @RequestMapping("/master_page")
+    @RequestMapping("/master")
     public String masterPage(){
         return "master_page";
     }
