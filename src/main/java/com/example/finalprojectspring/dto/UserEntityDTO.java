@@ -20,7 +20,7 @@ public class UserEntityDTO {
     private String email;
     @NotNull
     private String password;
-    @NotNull
+
     @NotBlank
     private String firstName;
     @NotNull
