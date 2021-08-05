@@ -25,6 +25,11 @@
                             class="fa fa-home"></i>Registration</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="#" th:text="#{message.input.Admin}" th:href="@{~/admin}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
             </ul>
 
             <div class="col-form-label">
