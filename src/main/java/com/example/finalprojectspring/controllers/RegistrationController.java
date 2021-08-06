@@ -25,7 +25,7 @@ private final IRegistrationInterf iRegistrationInterf;
 
     @GetMapping("/registration")
     public String registrationForm(Model model) {
-        model.addAttribute("user",new UserEntity());
+        model.addAttribute("user",new UserEntityDTO());
         return "reg_form_page";
     }
 
