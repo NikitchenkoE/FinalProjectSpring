@@ -54,6 +54,32 @@
     </nav>
 </div>
 
+<div th:switch="${showAllUserwihtRoleUser}">
+    <h2 th:case="null">No user found!</h2>
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${showAllUserwihtRoleUser}">
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.roles}"></td>
+                <td><a th:href="@{user-delete/{email}(email=${user.email})}">Delete</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
 
 </body>
 </html>
