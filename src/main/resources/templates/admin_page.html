@@ -54,32 +54,39 @@
     </nav>
 </div>
 
-<div th:switch="${showAllUserwihtRoleUser}">
-    <h2 th:case="null">No user found!</h2>
-    <div th:case="*">
-        <table>
-            <thead>
-            <tr>
-                <th>Email</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Role</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${showAllUserwihtRoleUser}">
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.roles}"></td>
-                <td><a th:href="@{user-delete/{email}(email=${user.email})}">Delete</a> </td>
-            </tr>
-            </tbody>
-        </table>
+
+<div class="container text-center" size="1000px">
+
+    <h2 class="align-self-center" th:text="#{message.input.tableName }"></h2>
+
+    <div th:switch="${showAllUserwihtRoleUser}">
+        <h2 th:case="null">No user found!</h2>
+        <div th:case="*">
+            <table class="table table-hover" size="100px">
+                <thead class="table-dark">
+                <tr>
+                    <th th:text="#{message.input.emailAdmin}">Email</th>
+                    <th th:text="#{message.input.firnNameAdmin}">First Name</th>
+                    <th th:text="#{message.input.lastNameAdmin}">Last Name</th>
+                    <th th:text="#{message.input.role}">Role</th>
+                    <th th:text="#{message.input.action}">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${showAllUserwihtRoleUser}">
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.roles}"></td>
+                    <td><a th:href="@{user-delete/{email}(email=${user.email})}" th:text="#{message.input.delete}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
-
 </div>
-
 
 </body>
 </html>
