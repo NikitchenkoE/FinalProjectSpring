@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -18,14 +19,21 @@ public class UserEntityDTO {
     @NotNull
     @Email
     private String email;
+
     @NotNull
+    @Size (min = 6, max = 30, message = "Password should be longest then 6 and shortest than 30 symbols")
     private String password;
 
-    @NotBlank
-    private String firstName;
     @NotNull
-    @NotBlank
+    @NotBlank(message = "Name should not be empty")
+    @Size (min = 2, max = 30)
+    private String firstName;
+
+    @NotNull
+    @NotBlank(message = "Surname should not be empty")
+    @Size (min = 2, max = 30)
     private String lastName;
+
     @NotNull
     private Set<Role_Of_Users> roles;
 
