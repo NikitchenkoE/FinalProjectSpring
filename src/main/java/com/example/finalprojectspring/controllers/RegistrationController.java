@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 
@@ -24,13 +25,13 @@ private final IRegistrationInterf iRegistrationInterf;
     }
 
     @GetMapping("/registration")
-    public String registrationForm(Model model) {
-        model.addAttribute("user",new UserEntityDTO());
+    public String registrationForm(Model model,@Valid UserEntityDTO userEntityDTO) {
+        model.addAttribute("user",userEntityDTO);
         return "reg_form_page";
     }
 
     @PostMapping("/process_register")
-    public String processRegister(UserEntityDTO user) {
+    public String processRegister(@Valid UserEntityDTO user) {
         user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
         iRegistrationInterf.addUserToDataBase(user);
 
