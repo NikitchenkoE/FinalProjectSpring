@@ -43,4 +43,11 @@ public class RegistrationService implements IRegistrationInterf {
         userRepository.save(userEntity);
         return userEntity;
     }
+
+    public boolean userPresentInDb(UserEntityDTO userEntityDTO){
+        final Optional<UserEntity> existenceUserByEmail =
+                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
+
+        return existenceUserByEmail.isPresent();
+    }
 }

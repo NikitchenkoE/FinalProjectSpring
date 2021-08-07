@@ -33,10 +33,16 @@ private final IRegistrationInterf iRegistrationInterf;
 
     @PostMapping("/process_register")
     public String processRegister(@ModelAttribute("user") @Valid UserEntityDTO user,
-                                  BindingResult bindingResult ) {
+                                  BindingResult bindingResult,Model model ) {
         if (bindingResult.hasErrors()) {
             return "reg_form_page";
         }
+
+        if (iRegistrationInterf.userPresentInDb(user)){
+            model.addAttribute("errorMessage","User already exist");
+            return "reg_form_page";
+        }
+
         user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
         iRegistrationInterf.addUserToDataBase(user);
 

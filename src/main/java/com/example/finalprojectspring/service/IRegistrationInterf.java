@@ -5,4 +5,5 @@ import com.example.finalprojectspring.entities.UserEntity;
 
 public interface IRegistrationInterf {
     UserEntity addUserToDataBase(UserEntityDTO userEntityDTO);
+    public boolean userPresentInDb(UserEntityDTO userEntityDTO);
 }
