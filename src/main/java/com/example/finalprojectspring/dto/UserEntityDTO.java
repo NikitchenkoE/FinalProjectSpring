@@ -1,6 +1,7 @@
 package com.example.finalprojectspring.dto;
 
 import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.validation.ValidPassword;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -20,8 +21,7 @@ public class UserEntityDTO {
     @Email
     private String email;
 
-    @NotNull
-    @Size (min = 6, max = 30, message = "Password should be longest then 6 and shortest than 30 symbols")
+    @ValidPassword
     private String password;
 
     @NotNull

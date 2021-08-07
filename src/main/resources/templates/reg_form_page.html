@@ -80,9 +80,11 @@
                 <label class="col-4 col-form-label" th:text="#{message.input.password}">Password: </label>
                 <div class="col-8">
                     <input type="password" th:field="*{password}" class="form-control"/>
-                    <div style="color:red">
-                        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"/>
-                    </div>
+                    <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                        <li th:each="message : ${error.split(',')}">
+                            <p class="error-message" th:text="${message}"></p>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
