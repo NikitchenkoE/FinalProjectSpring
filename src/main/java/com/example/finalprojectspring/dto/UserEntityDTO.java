@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import java.util.Set;
 @Builder
 @ToString
 public class UserEntityDTO {
+    
     @NotNull
     @Email
     private String email;
@@ -26,12 +28,14 @@ public class UserEntityDTO {
 
     @NotNull
     @NotBlank(message = "Name should not be empty")
-    @Size (min = 2, max = 30)
+    @Pattern(regexp = "[A-Z][a-z]*", message = "Mistake in First Name")
+    @Size(min = 2, max = 30)
     private String firstName;
 
     @NotNull
     @NotBlank(message = "Surname should not be empty")
-    @Size (min = 2, max = 30)
+    @Pattern(regexp = "\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" , message = "Mistake in Last Last Name" )
+    @Size(min = 2, max = 30)
     private String lastName;
 
    
