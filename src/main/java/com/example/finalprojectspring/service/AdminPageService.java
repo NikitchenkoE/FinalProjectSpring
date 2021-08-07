@@ -37,7 +37,7 @@ public class AdminPageService implements IAdminPageService {
         final Optional<UserEntity> existenceUserByEmail =
                 Optional.ofNullable(userRepository.findByEmail(email));
 
-        if (existenceUserByEmail.isPresent()){
+        if (!existenceUserByEmail.isPresent()){
             throw new ApiRequestExeption("This user do not exist or already deleted");
         }
 
