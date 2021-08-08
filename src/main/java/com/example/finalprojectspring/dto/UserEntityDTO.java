@@ -38,7 +38,8 @@ public class UserEntityDTO {
     @Size(min = 2, max = 30)
     private String lastName;
 
-   
     private Set<Role_Of_Users> roles;
 
+    @NotNull
+    private String occupation;
 }

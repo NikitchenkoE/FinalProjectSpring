@@ -1,18 +1,16 @@
 package com.example.finalprojectspring.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
-
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 @Entity
 @Table(name = "usr",
         uniqueConstraints = {@UniqueConstraint(columnNames={"email"})})
@@ -38,5 +36,10 @@ public class UserEntity {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name="user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role_Of_Users> roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "occupation_id")
+    private MasterOcupationEntity occupation;
+
 
 }

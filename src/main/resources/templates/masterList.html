@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Page</title>
+    <title>List Of Masters</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -47,8 +47,8 @@
             </ul>
 
             <div class="col-form-label">
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin?lang=ua">UA </a></button>
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin?lang=en">EN</a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=ua">UA </a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=en">EN</a></button>
                 <button sec:authorize="isAnonymous()"
                         class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
                     <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
@@ -66,12 +66,11 @@
     </nav>
 </div>
 
-
 <div class="container text-center" size="1000px">
 
-    <h2 class="align-self-center" th:text="#{message.input.tableName }"></h2>
+    <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
 
-    <div th:switch="${showAllUserwihtRoleUser}">
+    <div th:switch="${showAllUserWithRoleMaster}">
         <h2 th:case="null">No user found!</h2>
         <div th:case="*">
             <table class="table table-hover" size="100px">
@@ -81,15 +80,17 @@
                     <th th:text="#{message.input.firnNameAdmin}">First Name</th>
                     <th th:text="#{message.input.lastNameAdmin}">Last Name</th>
                     <th th:text="#{message.input.role}">Role</th>
+                    <th th:text="#{message.input.ocupation}">Occupation</th>
                     <th th:text="#{message.input.action}">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${showAllUserwihtRoleUser}">
+                <tr th:each="user : ${showAllUserWithRoleMaster}">
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.roles}"></td>
+                    <td th:text="${user.occupation.getOcupation()}"></td>
                     <td><a th:href="@{user-delete/{email}(email=${user.email})}" th:text="#{message.input.delete}">Delete</a>
                     </td>
                 </tr>
@@ -99,7 +100,6 @@
 
     </div>
 </div>
-
 
 
 </body>

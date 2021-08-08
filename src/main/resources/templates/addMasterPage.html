@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up </title>
+    <title>Add new master</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -47,9 +47,10 @@
             </ul>
 
             <div class="col-form-label">
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/registration?lang=ua">UA </a>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/add/master?lang=ua">UA </a>
                 </button>
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/registration?lang=en">EN</a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/add/master?lang=en">EN</a>
+                </button>
                 <button sec:authorize="isAnonymous()"
                         class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
                     <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
@@ -71,11 +72,11 @@
 <div class="container text-center">
 
     <div>
-        <h1 th:text="#{message.login.registration}">Registration</h1>
+        <h1 th:text="#{message.add.new.master}">Add new Master</h1>
     </div>
 
 
-    <form th:action="@{/process_register}" th:object="${user}"
+    <form th:action="@{/master_register}" th:object="${master}"
           method="post" style="max-width: 600px; margin: 0 auto;">
         <div class="m-3">
             <div class="form-group row">
@@ -120,6 +121,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label" th:text="#{message.input.ocupation}">Occupation </label>
+                <div class="col-8">
+                    <select class="custom-select my-1 mr-sm-2"  th:field="*{occupation}">
+                        <div>
+                            <option disabled="true" selected="selected" value="">Select</option>
+                            <option value="Hairdresser" th:text="#{message.add.hairdresser}">Parihmakher</option>
+                            <option value="Make-up" th:text="#{message.add.make-up}">Vizashist</option>
+                            <option value="Manicurist" th:text="#{message.add.manicurist}">Vizashist</option>
+                        </div>
+                    </select>
+                    <div style="color:red">
+                        <p th:if="${#fields.hasErrors('occupation')}" th:errorclass="error" th:errors="*{occupation}"/>
+                    </div>
+                </div>
+            </div>
+
             <div>
                 <button type="submit" class="btn btn-primary" th:text="#{message.login.submit}">Sign Up</button>
             </div>
