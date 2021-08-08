@@ -69,6 +69,37 @@
 
 <h1 th:text="#{message.general}"></h1>
 
+<div class="container text-center" size="1000px">
+
+    <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
+
+    <div th:switch="${showAllMasters}">
+        <h2 th:case="null">No user found!</h2>
+        <div th:case="*">
+            <table class="table table-hover" size="100px">
+                <thead class="table-dark">
+                <tr>
+                    <th th:text="#{message.input.firnNameAdmin}">First Name</th>
+                    <th th:text="#{message.input.lastNameAdmin}">Last Name</th>
+                    <th th:text="#{message.input.ocupation}">Occupation</th>
+                    <th th:text="#{message.input.action}" sec:authorize="isAuthenticated()">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${showAllMasters}">
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.occupation.getOcupation()}"></td>
+                    <td sec:authorize="isAuthenticated()"><button th:text="#{message.singup}">Sign up</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
 
 </body>
 </html>
