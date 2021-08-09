@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+
 @Service
 public class UserPrincipalsDetailsService implements UserDetailsService {
     private UserRepository userRepository;
@@ -18,7 +20,7 @@ public class UserPrincipalsDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(@NotNull String email) throws UsernameNotFoundException {
         UserEntity userEntity = this.userRepository.findByEmail(email);
         UserPrincipal userPrincipal = new UserPrincipal(userEntity);
         return userPrincipal;
