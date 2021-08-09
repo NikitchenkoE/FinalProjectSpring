@@ -23,23 +23,21 @@ public class RegistrationService implements IRegistrationInterf {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-
     @Override
-    @Transactional
     public UserEntity addUserToDataBase(UserEntityDTO userEntityDTO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(userEntityDTO.getEmail());
-        userEntity.setPassword(passwordEncoder.encode(userEntityDTO.getPassword()));
-        userEntity.setFirstName(userEntityDTO.getFirstName());
-        userEntity.setLastName(userEntityDTO.getLastName());
-        userEntity.setRoles(userEntityDTO.getRoles());
+        UserEntity userEntity = new UserEntity().builder()
+                .email(userEntityDTO.getEmail())
+                .password(passwordEncoder.encode(userEntityDTO.getPassword()))
+                .firstName(userEntityDTO.getFirstName())
+                .lastName(userEntityDTO.getLastName())
+                .roles(userEntityDTO.getRoles())
+                .build();
 
-        final Optional<UserEntity> existenceUserByEmail =
-                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
-        if (existenceUserByEmail.isPresent()) {
-            throw new ApiRequestExeption("User already exist in db");
-        }
+//        final Optional<UserEntity> existenceUserByEmail =
+//                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
+//        if (existenceUserByEmail.isPresent()) {
+//            throw new ApiRequestExeption("User already exist in db");
+//        }
 
         userRepository.save(userEntity);
         return userEntity;
