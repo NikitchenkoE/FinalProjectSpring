@@ -57,11 +57,11 @@ public class AdminPageService implements IAdminPageService {
                 .occupation(occupation)
                 .build();
 
-        final Optional<UserEntity> existenceUserByEmail =
-                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
-        if (existenceUserByEmail.isPresent()) {
-            throw new ApiRequestExeption("Master already exist in db");
-        }
+//        final Optional<UserEntity> existenceUserByEmail =
+//                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
+//        if (existenceUserByEmail.isPresent()) {
+//            throw new ApiRequestExeption("Master already exist in db");
+//        }
         userRepository.save(userEntity);
         return userEntity;
     }
