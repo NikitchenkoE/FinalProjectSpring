@@ -3,7 +3,7 @@ package com.example.finalprojectspring.controllers;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.entities.UserEntity;
-import com.example.finalprojectspring.service.IAdminPageService;
+import com.example.finalprojectspring.interfaices.IAdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

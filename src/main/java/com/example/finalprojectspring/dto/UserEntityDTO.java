@@ -18,7 +18,7 @@ import java.util.Set;
 @Builder
 @ToString
 public class UserEntityDTO {
-    
+
     @NotNull
     @Email
     private String email;
@@ -28,13 +28,11 @@ public class UserEntityDTO {
 
     @NotNull
     @NotBlank(message = "Name should not be empty")
-    @Pattern(regexp = "[A-Z][a-z]*", message = "Mistake in First Name")
     @Size(min = 2, max = 30)
     private String firstName;
 
     @NotNull
     @NotBlank(message = "Surname should not be empty")
-    @Pattern(regexp = "\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" , message = "Mistake in Last Last Name" )
     @Size(min = 2, max = 30)
     private String lastName;
 

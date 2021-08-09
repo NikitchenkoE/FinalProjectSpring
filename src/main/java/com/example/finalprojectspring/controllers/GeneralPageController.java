@@ -1,7 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.entities.UserEntity;
-import com.example.finalprojectspring.service.IGeneraPageService;
+import com.example.finalprojectspring.interfaices.IGeneraPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -21,22 +21,17 @@ public class GeneralPageController {
         this.iGeneraPageService = iGeneraPageService;
     }
 
-    @RequestMapping({"/","main"})
+    @RequestMapping({"/", "main"})
     public String mainPage() {
         return "general_page";
     }
 
-    @GetMapping({"main","/"})
-    public String showMastersOnGeneralPage (Model model){
+    @GetMapping({"main", "/"})
+    public String showMastersOnGeneralPage(Model model) {
         List<UserEntity> masters = iGeneraPageService.showAllMasters();
         model.addAttribute("showAllMasters", masters);
         return "general_page";
-        }
-
-
-
-
-
+    }
 
 
     @RequestMapping("/login")
@@ -45,17 +40,17 @@ public class GeneralPageController {
     }
 
     @RequestMapping("/user")
-    public String userPage(){
+    public String userPage() {
         return "user_page";
     }
 
     @RequestMapping("/admin")
-    public String adminPage(){
+    public String adminPage() {
         return "admin_page";
     }
 
     @RequestMapping("/master")
-    public String masterPage(){
+    public String masterPage() {
         return "master_page";
     }
 

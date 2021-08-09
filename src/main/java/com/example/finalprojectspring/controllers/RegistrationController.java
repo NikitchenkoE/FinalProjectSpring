@@ -2,7 +2,7 @@ package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.Role_Of_Users;
-import com.example.finalprojectspring.service.IRegistrationInterf;
+import com.example.finalprojectspring.interfaices.IRegistrationInterf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import java.util.Collections;
 @Controller
 public class RegistrationController {
 
-private final IRegistrationInterf iRegistrationInterf;
+    private final IRegistrationInterf iRegistrationInterf;
 
     @Autowired
     public RegistrationController(IRegistrationInterf iRegistrationInterf) {
@@ -27,19 +27,19 @@ private final IRegistrationInterf iRegistrationInterf;
 
     @GetMapping("/registration")
     public String registrationForm(Model model) {
-        model.addAttribute("user",new UserEntityDTO());
+        model.addAttribute("user", new UserEntityDTO());
         return "reg_form_page";
     }
 
     @PostMapping("/process_register")
     public String processRegister(@ModelAttribute("user") @Valid UserEntityDTO user,
-                                  BindingResult bindingResult,Model model ) {
+                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "reg_form_page";
         }
 
-        if (iRegistrationInterf.userPresentInDb(user)){
-            model.addAttribute("errorMessage","User already exist");
+        if (iRegistrationInterf.userPresentInDb(user)) {
+            model.addAttribute("errorMessage", "User already exist");
             return "reg_form_page";
         }
 

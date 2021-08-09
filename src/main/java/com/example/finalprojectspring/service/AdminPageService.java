@@ -5,6 +5,7 @@ import com.example.finalprojectspring.entities.MasterOcupationEntity;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
+import com.example.finalprojectspring.interfaices.IAdminPageService;
 import com.example.finalprojectspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

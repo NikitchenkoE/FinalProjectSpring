@@ -3,6 +3,7 @@ package com.example.finalprojectspring.service;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
+import com.example.finalprojectspring.interfaices.IRegistrationInterf;
 import com.example.finalprojectspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,7 +37,7 @@ public class RegistrationService implements IRegistrationInterf {
 
         final Optional<UserEntity> existenceUserByEmail =
                 Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
-        if(existenceUserByEmail.isPresent()){
+        if (existenceUserByEmail.isPresent()) {
             throw new ApiRequestExeption("User already exist in db");
         }
 

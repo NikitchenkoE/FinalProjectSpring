@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword,String> {
+public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override
     public void initialize(ValidPassword constraintAnnotation) {
@@ -18,7 +18,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
     @Override
     public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
         PasswordValidator passwordValidator = new PasswordValidator(Arrays.asList(
-                new LengthRule(8,30),
+                new LengthRule(8, 30),
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),
                 new CharacterRule(EnglishCharacterData.LowerCase, 1),
                 new CharacterRule(EnglishCharacterData.Digit, 1),
@@ -28,7 +28,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
         RuleResult ruleResult = passwordValidator.validate(new PasswordData(password));
 
-        if(ruleResult.isValid()){
+        if (ruleResult.isValid()) {
             return true;
         }
 
