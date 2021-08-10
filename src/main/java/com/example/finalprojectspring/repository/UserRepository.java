@@ -11,12 +11,13 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-     UserEntity findByEmail(String email);
+    UserEntity findByEmail(String email);
 
-     Page<UserEntity> findAllByRoles(Role_Of_Users role, Pageable pageable);
-     Page<UserEntity> findAll(Pageable pageable);
+    Page<UserEntity> findAllByRoles(Role_Of_Users role, Pageable pageable);
 
-     void deleteByEmail(String email);
+    Page<UserEntity> findAll(Pageable pageable);
 
-     List<UserEntity> findAllByOccupation(String occupation);
+    void deleteByEmail(String email);
+
+    List<UserEntity> findAllByOccupation(String occupation);
 }

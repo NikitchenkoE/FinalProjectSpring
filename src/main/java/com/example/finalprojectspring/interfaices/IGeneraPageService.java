@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface IGeneraPageService {
     public Page<UserEntity> showAllMasters(Pageable pageable);
+    Page<UserEntity> findPaginated(int pageNo, int pageSize);
 }

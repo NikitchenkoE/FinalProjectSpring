@@ -6,6 +6,7 @@ import com.example.finalprojectspring.interfaices.IGeneraPageService;
 import com.example.finalprojectspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,4 +25,14 @@ public class GeneraPageService implements IGeneraPageService {
     public Page<UserEntity> showAllMasters(Pageable pageable) {
         return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable );
     }
+
+
+    public Page<UserEntity> findPaginated(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER,pageable);
+    }
+
+
+
+
 }

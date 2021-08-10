@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,18 +26,22 @@ public class GeneralPageController {
         this.iGeneraPageService = iGeneraPageService;
     }
 
-    @RequestMapping({"/", "main"})
-    public String mainPage() {
-        return "general_page";
-    }
-
     @GetMapping({"main", "/"})
-    public String showMastersOnGeneralPage(Model model,@PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<UserEntity> masters = iGeneraPageService.showAllMasters(pageable);
-        model.addAttribute("showAllMasters", masters);
-        return "general_page";
+    public String showMastersOnGeneralPage(Model model, @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return findPaginated(1,model);
     }
 
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<UserEntity> page = iGeneraPageService.findPaginated(pageNo, pageSize);
+        List<UserEntity> listEmployees = page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+        return "general_page";
+    }
 
     @RequestMapping("/login")
     public String loginPage() {
