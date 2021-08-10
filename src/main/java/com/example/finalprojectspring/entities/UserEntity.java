@@ -3,6 +3,7 @@ package com.example.finalprojectspring.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @ToString
@@ -40,6 +41,10 @@ public class UserEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "occupation_id")
     private MasterOcupationEntity occupation;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usr_id")
+    private List<Reputation> reputation;
 
 
 }
