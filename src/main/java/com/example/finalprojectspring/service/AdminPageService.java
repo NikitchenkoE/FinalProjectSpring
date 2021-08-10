@@ -66,20 +66,19 @@ public class AdminPageService implements IAdminPageService {
         return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
     }
 
-    public Page<UserEntity> findPaginatedMaster(int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
-        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER,pageable);
+    public Page<UserEntity> findPaginatedMaster(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
     }
-
 
 
     public Page<UserEntity> findAllwithRoleUser(Pageable pageable) {
         return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
 
-    public Page<UserEntity> findPaginatedUser(int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
-        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER,pageable);
+    public Page<UserEntity> findPaginatedUser(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
 
 

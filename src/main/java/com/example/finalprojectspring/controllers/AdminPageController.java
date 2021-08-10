@@ -51,7 +51,7 @@ public class AdminPageController {
     @GetMapping("/admin/list/masters")
     public String showAllUsersWithRoleMaster(Model model,
                                              @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return findPaginatedMaster(1,model);
+        return findPaginatedMaster(1, model);
     }
 
     @GetMapping("/admin/adminPageMasters/{pageNomber}")
@@ -67,13 +67,13 @@ public class AdminPageController {
     }
 
 
-    @GetMapping({"admin/user-delete/{email}","admin/adminPageUsers/admin/user-delete/{email}"})
+    @GetMapping({"admin/user-delete/{email}", "admin/adminPageUsers/admin/user-delete/{email}"})
     public String deleteUserByEmail(@PathVariable("email") String email) {
         iAdminPageService.deleteUserByEmail(email);
         return "redirect:/admin";
     }
 
-    @GetMapping({"/admin/adminPageMasters/user-delete/{email}","admin/list/user-delete/{email}"})
+    @GetMapping({"/admin/adminPageMasters/user-delete/{email}", "admin/list/user-delete/{email}"})
     public String deleteMasterByEmail(@PathVariable("email") String email) {
         iAdminPageService.deleteUserByEmail(email);
         return "redirect:/admin/list/masters";

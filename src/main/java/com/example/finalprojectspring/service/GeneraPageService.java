@@ -23,7 +23,7 @@ public class GeneraPageService implements IGeneraPageService {
     }
 
     public Page<UserEntity> showAllMasters(Pageable pageable) {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable );
+        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
     }
 
 
