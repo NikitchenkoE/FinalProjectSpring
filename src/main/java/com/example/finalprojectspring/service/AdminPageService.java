@@ -8,6 +8,9 @@ import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
 import com.example.finalprojectspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +34,8 @@ public class AdminPageService implements IAdminPageService {
         return userRepository.findAll();
     }
 
-    public List<UserEntity> findAllwithRoleUser() {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER);
+    public Page<UserEntity> findAllwithRoleUser(Pageable pageable) {
+        return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
 
     @Transactional
@@ -72,8 +75,14 @@ public class AdminPageService implements IAdminPageService {
         return existenceUserByEmail.isPresent();
     }
 
-    public List<UserEntity> findAllWithRoleMaster() {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER);
+    public Page<UserEntity> findAllWithRoleMaster(Pageable pageable) {
+        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER,pageable);
     }
+
+    public Page<UserEntity> findPaginated(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.userRepository.findAll(pageable);
+    }
+
 
 }

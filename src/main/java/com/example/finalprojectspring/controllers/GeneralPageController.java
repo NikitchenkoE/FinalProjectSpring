@@ -3,6 +3,10 @@ package com.example.finalprojectspring.controllers;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IGeneraPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -27,8 +31,8 @@ public class GeneralPageController {
     }
 
     @GetMapping({"main", "/"})
-    public String showMastersOnGeneralPage(Model model) {
-        List<UserEntity> masters = iGeneraPageService.showAllMasters();
+    public String showMastersOnGeneralPage(Model model,@PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<UserEntity> masters = iGeneraPageService.showAllMasters(pageable);
         model.addAttribute("showAllMasters", masters);
         return "general_page";
     }

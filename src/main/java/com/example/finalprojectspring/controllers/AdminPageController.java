@@ -5,6 +5,10 @@ import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,14 +30,17 @@ public class AdminPageController {
 
 
     @GetMapping("/admin")
-    public String showAllUsersWithRoleUser(Model model) {
-        List<UserEntity> users = iAdminPageService.findAllwithRoleUser();
+    public String showAllUsersWithRoleUser(Model model,
+                                           @PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<UserEntity> users = iAdminPageService.findAllwithRoleUser(pageable);
         model.addAttribute("showAllUserwihtRoleUser", users);
         return "admin_page";
     }
+
     @GetMapping("/admin/list/masters")
-    public String showAllUsersWithRoleMaster(Model model) {
-        List<UserEntity> users = iAdminPageService.findAllWithRoleMaster();
+    public String showAllUsersWithRoleMaster(Model model,
+                                             @PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<UserEntity> users = iAdminPageService.findAllWithRoleMaster(pageable);
         model.addAttribute("showAllUserWithRoleMaster", users);
         return "masterList";
     }
@@ -74,8 +81,6 @@ public class AdminPageController {
 
         return "redirect:/admin";
     }
-
-
 
 
 }
