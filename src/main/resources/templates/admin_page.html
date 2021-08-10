@@ -71,7 +71,7 @@
 
     <h2 class="align-self-center" th:text="#{message.input.tableName }"></h2>
 
-    <div th:switch="${showAllUserwihtRoleUser}">
+    <div th:switch="${listUsers}">
         <h2 th:case="null">No user found!</h2>
         <div th:case="*">
             <table class="table table-hover" size="100px">
@@ -85,21 +85,42 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${showAllUserwihtRoleUser}">
+                <tr th:each="user : ${listUsers}">
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.roles}"></td>
-                    <td><a th:href="@{user-delete/{email}(email=${user.email})}" th:text="#{message.input.delete}">Delete</a>
+                    <td><a th:href="@{admin/user-delete/{email}(email=${user.email})}" th:text="#{message.input.delete}">Delete</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <div th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <div class="col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/admin/adminPageUsers/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+            </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageUsers/' + ${currentPage + 1}}">Next</a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageUsers/' + ${totalPages}}">Last</a>
+                        <span th:unless="${currentPage < totalPages}">Last</span>
+                    </div>
+                </div>
         </div>
 
     </div>
 </div>
-
+</div>
 
 
 </body>

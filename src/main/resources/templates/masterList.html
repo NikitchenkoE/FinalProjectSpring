@@ -47,8 +47,10 @@
             </ul>
 
             <div class="col-form-label">
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=ua">UA </a></button>
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=en">EN</a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=ua">UA </a>
+                </button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/admin/list/masters?lang=en">EN</a>
+                </button>
                 <button sec:authorize="isAnonymous()"
                         class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
                     <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
@@ -70,7 +72,7 @@
 
     <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
 
-    <div th:switch="${showAllUserWithRoleMaster}">
+    <div th:switch="${listMasters}">
         <h2 th:case="null">No user found!</h2>
         <div th:case="*">
             <table class="table table-hover" size="100px">
@@ -85,7 +87,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${showAllUserWithRoleMaster}">
+                <tr th:each="user : ${listMasters}">
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.firstName}"></td>
                     <td th:text="${user.lastName}"></td>
@@ -96,6 +98,29 @@
                 </tr>
                 </tbody>
             </table>
+            <div th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <div class="col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/admin/adminPageMasters/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+            </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}"
+                           th:href="@{'/admin/adminPageMasters/' + ${currentPage + 1}}">Next</a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageMasters/' + ${totalPages}}">Last</a>
+                        <span th:unless="${currentPage < totalPages}">Last</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

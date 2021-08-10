@@ -31,12 +31,12 @@ public class GeneralPageController {
         return findPaginated(1,model);
     }
 
-    @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+    @GetMapping("/generalpage/{pageNomber}")
+    public String findPaginated(@PathVariable(value = "pageNomber") int pageNomber, Model model) {
         int pageSize = 5;
-        Page<UserEntity> page = iGeneraPageService.findPaginated(pageNo, pageSize);
+        Page<UserEntity> page = iGeneraPageService.findPaginated(pageNomber, pageSize);
         List<UserEntity> listEmployees = page.getContent();
-        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("currentPage", pageNomber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listEmployees", listEmployees);

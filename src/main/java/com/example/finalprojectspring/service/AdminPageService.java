@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,13 +29,6 @@ public class AdminPageService implements IAdminPageService {
         this.userRepository = userRepository;
     }
 
-    public List<UserEntity> findAll() {
-        return userRepository.findAll();
-    }
-
-    public Page<UserEntity> findAllwithRoleUser(Pageable pageable) {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
-    }
 
     @Transactional
     public void deleteUserByEmail(String email) {
@@ -60,11 +52,6 @@ public class AdminPageService implements IAdminPageService {
                 .occupation(occupation)
                 .build();
 
-//        final Optional<UserEntity> existenceUserByEmail =
-//                Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
-//        if (existenceUserByEmail.isPresent()) {
-//            throw new ApiRequestExeption("Master already exist in db");
-//        }
         userRepository.save(userEntity);
         return userEntity;
     }
@@ -76,12 +63,23 @@ public class AdminPageService implements IAdminPageService {
     }
 
     public Page<UserEntity> findAllWithRoleMaster(Pageable pageable) {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER,pageable);
+        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
     }
 
-    public Page<UserEntity> findPaginated(int pageNo, int pageSize){
+    public Page<UserEntity> findPaginatedMaster(int pageNo, int pageSize){
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
-        return this.userRepository.findAll(pageable);
+        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER,pageable);
+    }
+
+
+
+    public Page<UserEntity> findAllwithRoleUser(Pageable pageable) {
+        return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
+    }
+
+    public Page<UserEntity> findPaginatedUser(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER,pageable);
     }
 
 

@@ -31,27 +31,49 @@ public class AdminPageController {
 
     @GetMapping("/admin")
     public String showAllUsersWithRoleUser(Model model,
-                                           @PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<UserEntity> users = iAdminPageService.findAllwithRoleUser(pageable);
-        model.addAttribute("showAllUserwihtRoleUser", users);
+                                           @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return findPaginatedUser(1, model);
+    }
+
+    @GetMapping("/admin/adminPageUsers/{pageNomber}")
+    public String findPaginatedUser(@PathVariable(value = "pageNomber") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<UserEntity> page = iAdminPageService.findPaginatedUser(pageNo, pageSize);
+        List<UserEntity> listUsers = page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listUsers", listUsers);
         return "admin_page";
     }
 
+
     @GetMapping("/admin/list/masters")
     public String showAllUsersWithRoleMaster(Model model,
-                                             @PageableDefault(sort = {"ID"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<UserEntity> users = iAdminPageService.findAllWithRoleMaster(pageable);
-        model.addAttribute("showAllUserWithRoleMaster", users);
+                                             @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return findPaginatedMaster(1,model);
+    }
+
+    @GetMapping("/admin/adminPageMasters/{pageNomber}")
+    public String findPaginatedMaster(@PathVariable(value = "pageNomber") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<UserEntity> page = iAdminPageService.findPaginatedMaster(pageNo, pageSize);
+        List<UserEntity> listMasters = page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listMasters", listMasters);
         return "masterList";
     }
 
-    @GetMapping("user-delete/{email}")
+
+    @GetMapping({"admin/user-delete/{email}","admin/adminPageUsers/admin/user-delete/{email}"})
     public String deleteUserByEmail(@PathVariable("email") String email) {
         iAdminPageService.deleteUserByEmail(email);
         return "redirect:/admin";
     }
 
-    @GetMapping("admin/list/user-delete/{email}")
+    @GetMapping({"/admin/adminPageMasters/user-delete/{email}","admin/list/user-delete/{email}"})
     public String deleteMasterByEmail(@PathVariable("email") String email) {
         iAdminPageService.deleteUserByEmail(email);
         return "redirect:/admin/list/masters";
@@ -64,7 +86,7 @@ public class AdminPageController {
         return "addMasterPage";
     }
 
-    @PostMapping("/master_register")
+    @PostMapping("/admin/master_register")
     public String processRegister(@ModelAttribute("master") @Valid UserEntityDTO master,
                                   BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
