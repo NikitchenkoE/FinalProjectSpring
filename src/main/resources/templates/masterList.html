@@ -100,9 +100,6 @@
             </table>
             <div th:if="${totalPages > 1}">
                 <div class="row col-sm-10">
-                    <div class="col-sm-2">
-                        Total Rows: [[${totalItems}]]
-                    </div>
                     <div class="col-sm-1">
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
       <a th:if="${currentPage != i}" th:href="@{'/admin/adminPageMasters/' + ${i}}">[[${i}]]</a>
@@ -111,13 +108,13 @@
                     </div>
                     <div class="col-sm-1">
                         <a th:if="${currentPage < totalPages}"
-                           th:href="@{'/admin/adminPageMasters/' + ${currentPage + 1}}">Next</a>
-                        <span th:unless="${currentPage < totalPages}">Next</span>
+                           th:href="@{'/admin/adminPageMasters/' + ${currentPage + 1}}" th:text="#{message.next}">Next</a>
+                        <span th:unless="${currentPage < totalPages}" th:text="#{message.next}">Next</span>
                     </div>
 
                     <div class="col-sm-1">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageMasters/' + ${totalPages}}">Last</a>
-                        <span th:unless="${currentPage < totalPages}">Last</span>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageMasters/' + ${totalPages}}" th:text="#{message.last}">Last</a>
+                        <span th:unless="${currentPage < totalPages}" th:text="#{message.last}">Last</span>
                     </div>
                 </div>
             </div>
