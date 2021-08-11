@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     void deleteByEmail(String email);
 
     List<UserEntity> findAllByOccupation(String occupation);
+
+
 }

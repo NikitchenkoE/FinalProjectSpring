@@ -46,5 +46,9 @@ public class UserEntity {
     @JoinColumn(name = "usr_id")
     private List<Reputation> reputation;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usr_id")
+    private List<MasterClient> clients;
+
 
 }
