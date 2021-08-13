@@ -69,6 +69,16 @@
 
 <h1 th:text="#{message.general}"></h1>
 
+<div>
+<form method="get" th:action="@{'/generalpage/' + ${currentPage}}">
+    <p></p>
+    <input type="text" name="occupationFilter" placeholder="occupation">
+    <p></p>
+    <div class="col-sm-8">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+</div>
 <div class="container text-center" size="1000px">
 
     <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
@@ -105,12 +115,14 @@
             </span>
                     </div>
                     <div class="col-sm-1">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/generalpage/' + ${currentPage + 1}}" th:text="#{message.next}">Next</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/generalpage/' + ${currentPage + 1}}"
+                           th:text="#{message.next}">Next</a>
                         <span th:unless="${currentPage < totalPages}" th:text="#{message.next}">Next</span>
                     </div>
 
                     <div class="col-sm-1">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/generalpage/' + ${totalPages}}" th:text="#{message.last}" >Last</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/generalpage/' + ${totalPages}}"
+                           th:text="#{message.last}">Last</a>
                         <span th:unless="${currentPage < totalPages}" th:text="#{message.last}">Last</span>
                     </div>
                 </div>

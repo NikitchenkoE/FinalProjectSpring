@@ -25,7 +25,6 @@ public class MasterClient {
 
     private String clientEmail;
 
-    @UniqueElements
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private Date date;
 

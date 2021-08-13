@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class GeneralPageController {
 
     private final IGeneraPageService iGeneraPageService;
 
+    private String occupation;
+    private final String ALL = "all";
+
     @Autowired
     public GeneralPageController(IGeneraPageService iGeneraPageService) {
         this.iGeneraPageService = iGeneraPageService;
@@ -28,13 +31,25 @@ public class GeneralPageController {
 
     @GetMapping({"main", "/"})
     public String showMastersOnGeneralPage(Model model, @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return findPaginated(1,model);
+        return findPaginated(1, model, ALL);
     }
 
     @GetMapping("/generalpage/{pageNomber}")
-    public String findPaginated(@PathVariable(value = "pageNomber") int pageNomber, Model model) {
+    public String findPaginated(@PathVariable(value = "pageNomber") int pageNomber, Model model, @RequestParam(required = false, name = "occupationFilter")
+            String occupationFilter) {
         int pageSize = 5;
-        Page<UserEntity> page = iGeneraPageService.findPaginated(pageNomber, pageSize);
+        Page<UserEntity> page;
+        if (occupation == null && occupationFilter == null) {
+            page = iGeneraPageService.findPaginated(pageNomber, pageSize, ALL);
+        } else {
+            if (occupationFilter == null) {
+                page = iGeneraPageService.findPaginated(pageNomber, pageSize, occupation);
+
+            } else {
+                page = iGeneraPageService.findPaginated(pageNomber, pageSize, occupationFilter);
+                occupation = occupationFilter;
+            }
+        }
         List<UserEntity> listEmployees = page.getContent();
         model.addAttribute("currentPage", pageNomber);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -42,6 +57,7 @@ public class GeneralPageController {
         model.addAttribute("listEmployees", listEmployees);
         return "general_page";
     }
+
 
     @RequestMapping("/login")
     public String loginPage() {
