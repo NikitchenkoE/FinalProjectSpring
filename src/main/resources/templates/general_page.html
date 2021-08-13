@@ -66,13 +66,16 @@
     </nav>
 </div>
 
-
-<h1 th:text="#{message.general}"></h1>
-
-<div>
-<form method="get" th:action="@{'/generalpage/' + ${currentPage}}">
+<div class="container text-left">
+<form class="form-inline" method="get" th:action="@{'/generalpage/' + ${currentPage}}">
     <p></p>
-    <input type="text" name="occupationFilter" placeholder="occupation">
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" type="text" name="occupationFilter" placeholder="occupation">
+        <option selected>Choose...</option>
+        <option value="Make-up">Make-up</option>
+        <option value="Manicurist">Manicurist</option>
+        <option value="Hairdresser">Hairdresser</option>
+        <option value="all">All</option>
+    </select>
     <p></p>
     <div class="col-sm-8">
         <button type="submit" class="btn btn-primary">Filter</button>
