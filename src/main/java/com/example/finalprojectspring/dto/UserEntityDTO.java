@@ -1,5 +1,6 @@
 package com.example.finalprojectspring.dto;
 
+import com.example.finalprojectspring.entities.Rating;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.validation.ValidPassword;
 import com.sun.istack.NotNull;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -40,4 +42,6 @@ public class UserEntityDTO {
 
     @NotNull
     private String occupation;
+
+    double averageRating;
 }

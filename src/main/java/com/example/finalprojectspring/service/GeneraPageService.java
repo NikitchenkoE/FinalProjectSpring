@@ -1,5 +1,6 @@
 package com.example.finalprojectspring.service;
 
+import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IGeneraPageService;
@@ -26,13 +27,25 @@ public class GeneraPageService implements IGeneraPageService {
     }
 
     @Override
-    public Page<UserEntity> findPaginated(int pageNo, int pageSize, String occupation) {
+    public Page<UserEntityDTO> findPaginated(int pageNo, int pageSize, String occupation) {
         if (occupation == null || ALL.equals(occupation)) {
-            return findPaginated(pageNo, pageSize);
+            return findPaginatedDto(pageNo, pageSize);
         }
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<UserEntity> sortedList = userRepository.findAllByOccupation(occupation, pageable);
-        return sortedList;
+        Page<UserEntity> list = userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
+        Page<UserEntityDTO> sorted = new PageImpl<>(list.stream()
+                .map(o -> userEntityToUserEntityDto(o))
+                .collect(Collectors.toList()), pageable, list.getTotalElements());
+        return sorted;
+    }
+
+    public Page<UserEntityDTO> findPaginatedDto(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<UserEntity> list = userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
+        Page<UserEntityDTO> sorted = new PageImpl<>(list.stream()
+                .map(o -> userEntityToUserEntityDto(o))
+                .collect(Collectors.toList()), pageable, list.getTotalElements());
+        return sorted;
     }
 
     public Page<UserEntity> findPaginated(int pageNo, int pageSize) {
@@ -41,4 +54,18 @@ public class GeneraPageService implements IGeneraPageService {
     }
 
 
+    private UserEntityDTO userEntityToUserEntityDto(UserEntity userEntity) {
+        UserEntityDTO userEntityDTO = new UserEntityDTO().builder()
+                .email(userEntity.getEmail())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .roles(userEntity.getRoles())
+                .occupation(userEntity.getOccupation().getOcupation())
+                .averageRating(userEntity.getRatings().stream()
+                        .mapToDouble(rating -> rating.getRating())
+                        .average()
+                        .orElse(0.0))
+                .build();
+        return userEntityDTO;
+    }
 }

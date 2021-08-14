@@ -1,5 +1,6 @@
 package com.example.finalprojectspring.controllers;
 
+import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IGeneraPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class GeneralPageController {
     public String findPaginated(@PathVariable(value = "pageNomber") int pageNomber, Model model, @RequestParam(required = false, name = "occupationFilter")
             String occupationFilter) {
         int pageSize = 5;
-        Page<UserEntity> page;
+        Page<UserEntityDTO> page;
         if (occupation == null && occupationFilter == null) {
             page = iGeneraPageService.findPaginated(pageNomber, pageSize, ALL);
         } else {
@@ -50,7 +51,7 @@ public class GeneralPageController {
                 occupation = occupationFilter;
             }
         }
-        List<UserEntity> listEmployees = page.getContent();
+        List<UserEntityDTO> listEmployees = page.getContent();
         model.addAttribute("currentPage", pageNomber);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());

@@ -13,6 +13,7 @@ import java.util.Set;
 @Getter
 @Builder
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usr",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class UserEntity {
@@ -43,12 +44,10 @@ public class UserEntity {
     private MasterOcupationEntity occupation;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usr_id")
-    private List<Reputation> reputation;
+    @JoinColumn(name = "schedule_id")
+    private List<ScheduleEntity> schedule;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usr_id")
-    private List<MasterClient> clients;
-
+    List<Rating> ratings;
 
 }
