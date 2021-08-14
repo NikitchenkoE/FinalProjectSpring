@@ -32,7 +32,6 @@ public class GeneraPageService implements IGeneraPageService {
         }
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<UserEntity> sortedList = userRepository.findAllByOccupation(occupation, pageable);
-        System.out.println(sortedList);
         return sortedList;
     }
 
