@@ -56,7 +56,7 @@ public class GeneralPageController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listEmployees", listEmployees);
-        return "general_page";
+        return "redirect:/general_page";
     }
 
 

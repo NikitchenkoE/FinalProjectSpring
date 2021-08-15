@@ -46,7 +46,7 @@ public class RegistrationController {
         user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
         iRegistrationInterf.addUserToDataBase(user);
 
-        return "login_page";
+        return "redirect:/login_page";
     }
 
 
