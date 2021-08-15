@@ -43,5 +43,5 @@ public class UserEntityDTO {
     @NotNull
     private String occupation;
 
-    double averageRating;
+    private double averageRating;
 }
