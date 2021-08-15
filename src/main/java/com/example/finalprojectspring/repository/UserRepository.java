@@ -18,7 +18,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Page<UserEntity> findAllByRoles(Role_Of_Users role, Pageable pageable);
 
     @Query("select u from UserEntity u join u.occupation o where o.ocupation=?1")
-
     Page<UserEntity> findAllByOccupation(String occupation, Pageable pageable);
 
     Page<UserEntity> findAll(Pageable pageable);

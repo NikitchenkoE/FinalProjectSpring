@@ -32,7 +32,7 @@ public class GeneraPageService implements IGeneraPageService {
             return findPaginatedDto(pageNo, pageSize);
         }
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<UserEntity> list = userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
+        Page<UserEntity> list = userRepository.findAllByOccupation(occupation, pageable);
         Page<UserEntityDTO> sorted = new PageImpl<>(list.stream()
                 .map(o -> userEntityToUserEntityDto(o))
                 .collect(Collectors.toList()), pageable, list.getTotalElements());
