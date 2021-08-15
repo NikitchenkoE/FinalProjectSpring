@@ -8,25 +8,19 @@ import java.util.Date;
 
 @Entity
 @Data
-public class ScheduleEntity{
+public class ScheduleEntity {
 
     @Id
     private Long ID;
 
     private Date workDay;
 
-    private String emailClient;
-    private String firstNameClient;
-    private String lastNameClient;
+    private String masterEmail;
+    private Long clientId;
 
-    private Boolean firstHour;
-    private Boolean secondHour;
-    private Boolean thirdHour;
-    private Boolean forthHour;
-
-
-
-
-
+    private Boolean firstHour = new Boolean(true);
+    private Boolean secondHour = new Boolean(true);
+    private Boolean thirdHour = new Boolean(true);
+    private Boolean forthHour = new Boolean(true);
 
 }

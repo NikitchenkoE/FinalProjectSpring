@@ -4,6 +4,7 @@ import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
+@Log4j
 public class AdminPageController {
 
     private final IAdminPageService iAdminPageService;
@@ -32,6 +34,7 @@ public class AdminPageController {
     @GetMapping("/admin")
     public String showAllUsersWithRoleUser(Model model,
                                            @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        log.info("Showed admin page");
         return findPaginatedUser(1, model);
     }
 
@@ -51,6 +54,7 @@ public class AdminPageController {
     @GetMapping("/admin/list/masters")
     public String showAllUsersWithRoleMaster(Model model,
                                              @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        log.info("Showed page with list of masters");
         return findPaginatedMaster(1, model);
     }
 
@@ -82,6 +86,7 @@ public class AdminPageController {
 
     @GetMapping("/admin/add/master")
     public String registrationForm(Model model) {
+        log.info("showed master registration page");
         model.addAttribute("master", new UserEntityDTO());
         return "addMasterPage";
     }
@@ -90,6 +95,7 @@ public class AdminPageController {
     public String processRegister(@ModelAttribute("master") @Valid UserEntityDTO master,
                                   BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            log.error("Error in validation on master registration page");
             return "addMasterPage";
         }
 

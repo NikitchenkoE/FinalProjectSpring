@@ -5,6 +5,7 @@ import com.example.finalprojectspring.entities.Rating;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.InterfaceUserMarkService;
 import com.example.finalprojectspring.repository.UserRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Log4j
 public class UserMarkService implements InterfaceUserMarkService {
 
     private final UserRepository userRepository;
@@ -23,6 +25,7 @@ public class UserMarkService implements InterfaceUserMarkService {
 
     @Transactional
     public void sentMarkToMaster(RatingDTO ratingDTO,String email){
+        log.info("Added mark to master");
         UserEntity userEntity = userRepository.findByEmail(email);
         List<Rating> listRating = userEntity.getRatings();
         Rating rating = new Rating();

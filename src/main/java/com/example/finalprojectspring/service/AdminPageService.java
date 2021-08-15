@@ -7,6 +7,7 @@ import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
 import com.example.finalprojectspring.repository.UserRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Log4j
 public class AdminPageService implements IAdminPageService {
 
     private final PasswordEncoder passwordEncoder;
@@ -32,6 +34,7 @@ public class AdminPageService implements IAdminPageService {
 
     @Transactional
     public void deleteUserByEmail(String email) {
+        log.info("user deleted");
         final Optional<UserEntity> existenceUserByEmail =
                 Optional.ofNullable(Optional.ofNullable(userRepository.findByEmail(email)).
                         orElseThrow(() ->
@@ -41,6 +44,7 @@ public class AdminPageService implements IAdminPageService {
 
     @Transactional
     public UserEntity createNewMaster(UserEntityDTO userEntityDTO) {
+        log.info("Added new master");
         MasterOcupationEntity occupation = new MasterOcupationEntity();
         occupation.setOcupation(userEntityDTO.getOccupation());
         UserEntity userEntity = new UserEntity().builder()
@@ -57,23 +61,15 @@ public class AdminPageService implements IAdminPageService {
     }
 
     public boolean userPresentInDb(UserEntityDTO userEntityDTO) {
+        log.error("User present in db");
         final Optional<UserEntity> existenceUserByEmail =
                 Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
         return existenceUserByEmail.isPresent();
     }
 
-    public Page<UserEntity> findAllWithRoleMaster(Pageable pageable) {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
-    }
-
     public Page<UserEntity> findPaginatedMaster(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
-    }
-
-
-    public Page<UserEntity> findAllwithRoleUser(Pageable pageable) {
-        return userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
 
     public Page<UserEntity> findPaginatedUser(int pageNo, int pageSize) {

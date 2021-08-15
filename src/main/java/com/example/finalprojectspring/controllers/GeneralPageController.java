@@ -3,6 +3,7 @@ package com.example.finalprojectspring.controllers;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IGeneraPageService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@Log4j
 public class GeneralPageController {
 
     private final IGeneraPageService iGeneraPageService;
@@ -32,6 +34,7 @@ public class GeneralPageController {
 
     @GetMapping({"main", "/"})
     public String showMastersOnGeneralPage(Model model, @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        log.info("Showed general page");
         return findPaginated(1, model, ALL);
     }
 
@@ -56,12 +59,13 @@ public class GeneralPageController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listEmployees", listEmployees);
-        return "redirect:/general_page";
+        return "general_page";
     }
 
 
     @RequestMapping("/login")
     public String loginPage() {
+        log.info("Showed login page");
         return "login_page";
     }
 
@@ -70,15 +74,11 @@ public class GeneralPageController {
         return "user_page";
     }
 
-    @RequestMapping("/admin")
-    public String adminPage() {
-        return "admin_page";
-    }
 
-    @RequestMapping("/master")
-    public String masterPage() {
-        return "master_page";
-    }
+//    @RequestMapping("/master")
+//    public String masterPage() {
+//        return "master_page";
+//    }
 
 
 }

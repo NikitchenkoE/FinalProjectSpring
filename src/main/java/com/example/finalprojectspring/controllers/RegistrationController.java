@@ -3,6 +3,7 @@ package com.example.finalprojectspring.controllers;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.interfaices.IRegistrationInterf;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Collections;
 
-
+@Log4j
 @Controller
 public class RegistrationController {
 
@@ -27,6 +28,7 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registrationForm(Model model) {
+        log.info("showed user registration page");
         model.addAttribute("user", new UserEntityDTO());
         return "reg_form_page";
     }
@@ -39,6 +41,7 @@ public class RegistrationController {
         }
 
         if (iRegistrationInterf.userPresentInDb(user)) {
+            log.error("Error user already exist");
             model.addAttribute("errorMessage", "User already exist");
             return "reg_form_page";
         }
@@ -46,7 +49,7 @@ public class RegistrationController {
         user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
         iRegistrationInterf.addUserToDataBase(user);
 
-        return "redirect:/login_page";
+        return "redirect:/login";
     }
 
 

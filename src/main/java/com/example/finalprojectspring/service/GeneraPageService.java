@@ -48,10 +48,10 @@ public class GeneraPageService implements IGeneraPageService {
         return sorted;
     }
 
-    public Page<UserEntity> findPaginated(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
-    }
+//    public Page<UserEntity> findPaginated(int pageNo, int pageSize) {
+//        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+//        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
+//    }
 
 
     private UserEntityDTO userEntityToUserEntityDto(UserEntity userEntity) {
