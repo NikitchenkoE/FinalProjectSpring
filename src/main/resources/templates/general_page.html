@@ -96,7 +96,7 @@
                     <th th:text="#{message.input.lastNameAdmin}">Last Name</th>
                     <th th:text="#{message.input.ocupation}">Occupation</th>
                     <th>Rating</th>
-                    <th th:text="#{message.input.action}" sec:authorize="isAuthenticated()">Action</th>
+                    <th th:text="#{message.input.action}" sec:authorize="hasRole('USER')">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -105,8 +105,8 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.occupation}"></td>
                     <td th:text="${user.averageRating}"></td>
-                    <td sec:authorize="isAuthenticated()">
-                        <button th:text="#{message.singup}">Sign up</button>
+                    <td sec:authorize="hasRole('USER')" >
+                        <a th:text="#{message.singup}" th:href="@{'/user/sighnUp/' + ${user.email}}" >Sign up</a>
                     </td>
                 </tr>
                 </tbody>
