@@ -1,15 +1,22 @@
 package com.example.finalprojectspring.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Rating {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
-    double rating;
+    private double rating;
 }

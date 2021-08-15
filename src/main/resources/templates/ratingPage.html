@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Rating Page</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/sentMark}" th:object="${markMaster}"
+      method="post" style="max-width: 600px; margin: 0 auto;">
+
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Mark </label>
+            <div class="col-8">
+<!--                TODO check problem with field
+-->
+                <select class="custom-select my-1 mr-sm-2"  th:field="*{ratingDto}">
+                    <div>
+                        <option disabled="true" selected="selected" value="1.0">Select</option>
+                        <option value="1.0">1</option>
+                        <option value="2.0">2</option>
+                        <option value="3.0">3</option>
+                        <option value="4.0">4</option>
+                        <option value="5.0">5</option>
+
+                    </div>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary" th:text="#{message.login.submit}">Sign Up</button>
+        </div>
+
+</form>
+</body>
+</html>
