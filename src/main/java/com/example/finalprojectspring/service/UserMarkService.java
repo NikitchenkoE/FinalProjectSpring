@@ -24,7 +24,7 @@ public class UserMarkService implements InterfaceUserMarkService {
     }
 
     @Transactional
-    public void sentMarkToMaster(RatingDTO ratingDTO,String email){
+    public boolean sentMarkToMaster(RatingDTO ratingDTO,String email){
         log.info("Added mark to master");
         UserEntity userEntity = userRepository.findByEmail(email);
         List<Rating> listRating = userEntity.getRatings();
@@ -33,5 +33,6 @@ public class UserMarkService implements InterfaceUserMarkService {
         listRating.add(rating);
         userEntity.setRatings(listRating);
         userRepository.save(userEntity);
+        return true;
     }
 }
