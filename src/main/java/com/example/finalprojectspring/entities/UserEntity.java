@@ -39,15 +39,14 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Set<Role_Of_Users> roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "occupation_id")
     private MasterOcupationEntity occupation;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schedule_id")
-    private List<ScheduleEntity> schedule;
+    List<ScheduleEntity> schedule;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Rating> ratings;
 
 }
