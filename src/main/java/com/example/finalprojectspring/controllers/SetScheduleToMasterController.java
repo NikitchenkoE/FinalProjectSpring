@@ -1,7 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
-import com.example.finalprojectspring.service.SetScheduleToMasterServiceInterface;
+import com.example.finalprojectspring.interfaices.SetScheduleToMasterServiceInterface;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
