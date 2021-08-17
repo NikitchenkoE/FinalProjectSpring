@@ -1,8 +1,10 @@
 package com.example.finalprojectspring.service;
 
+import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.MasterOcupationEntity;
 import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
@@ -76,6 +78,7 @@ public class AdminPageService implements IAdminPageService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
+
 
 
 }
