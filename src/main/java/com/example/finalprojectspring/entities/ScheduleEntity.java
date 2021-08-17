@@ -1,29 +1,40 @@
 package com.example.finalprojectspring.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 import java.util.Date;
 
+
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Builder
 @Entity
-@Data
 public class ScheduleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long ID;
 
-    private Date workDay;
+    private Timestamp workDay;
 
     private String masterEmail;
-    private Long clientId;
 
-    private Boolean firstHour = new Boolean(true);
-    private Boolean secondHour = new Boolean(true);
-    private Boolean thirdHour = new Boolean(true);
-    private Boolean forthHour = new Boolean(true);
+    private Long clientIdFirstHour;
+    private Long clientIdSecondHour;
+    private Long clientIdThirdHour;
+    private Long clientIdForthHour;
+
+    private Boolean firstHour;
+    private Boolean secondHour;
+    private Boolean thirdHour;
+    private Boolean forthHour;
 
 }

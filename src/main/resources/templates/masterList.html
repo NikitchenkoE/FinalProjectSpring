@@ -83,6 +83,7 @@
                     <th th:text="#{message.input.lastNameAdmin}">Last Name</th>
                     <th th:text="#{message.input.role}">Role</th>
                     <th th:text="#{message.input.ocupation}">Occupation</th>
+                    <th th:text="#{message.add.schedule}">Add schedule</th>
                     <th th:text="#{message.input.action}">Action</th>
                 </tr>
                 </thead>
@@ -93,6 +94,8 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.roles}"></td>
                     <td th:text="${user.occupation.getOcupation()}"></td>
+                    <td><a th:text="#{message.add.day}" th:href="@{'/admin/add/schedule/' + ${user.email}}">Sign up</a>
+                    </td>
                     <td><a th:href="@{user-delete/{email}(email=${user.email})}" th:text="#{message.input.delete}">Delete</a>
                     </td>
                 </tr>
@@ -108,12 +111,14 @@
                     </div>
                     <div class="col-sm-1">
                         <a th:if="${currentPage < totalPages}"
-                           th:href="@{'/admin/adminPageMasters/' + ${currentPage + 1}}" th:text="#{message.next}">Next</a>
+                           th:href="@{'/admin/adminPageMasters/' + ${currentPage + 1}}"
+                           th:text="#{message.next}">Next</a>
                         <span th:unless="${currentPage < totalPages}" th:text="#{message.next}">Next</span>
                     </div>
 
                     <div class="col-sm-1">
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageMasters/' + ${totalPages}}" th:text="#{message.last}">Last</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/adminPageMasters/' + ${totalPages}}"
+                           th:text="#{message.last}">Last</a>
                         <span th:unless="${currentPage < totalPages}" th:text="#{message.last}">Last</span>
                     </div>
                 </div>
