@@ -1,9 +1,9 @@
 package com.example.finalprojectspring.service;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
-import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.entities.UserEntity;
+import com.example.finalprojectspring.interfaices.SetScheduleToMasterServiceInterface;
 import com.example.finalprojectspring.repository.ScheduleRepository;
 import com.example.finalprojectspring.repository.UserRepository;
 import lombok.extern.log4j.Log4j;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
