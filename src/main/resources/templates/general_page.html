@@ -71,16 +71,15 @@
         </div>
     </nav>
 </div>
-<!--TODO add bundles to filter-->
 <div class="container text-left">
 <form class="form-inline" method="get" th:action="@{'/generalpage/' + ${currentPage}}">
     <p></p>
     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" type="text" name="occupationFilter" placeholder="occupation">
         <option selected>Choose...</option>
-        <option value="Make-up">Make-up</option>
-        <option value="Manicurist">Manicurist</option>
-        <option value="Hairdresser">Hairdresser</option>
-        <option value="all">All</option>
+        <option value="Make-up" th:text="#{message.show.make-up}">Make-up</option>
+        <option value="Manicurist" th:text="#{message.show.manicurist}">Manicurist</option>
+        <option value="Hairdresser" th:text="#{message.show.hairdresser}">Hairdresser</option>
+        <option value="all" th:text="#{message.all.manicurist}">All</option>
     </select>
     <p></p>
     <div class="col-sm-8">
