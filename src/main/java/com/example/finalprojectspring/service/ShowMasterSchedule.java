@@ -56,7 +56,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         scheduleRepository.save(scheduleEntity);
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailFirstHour(),
                 "Mark",
-                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
+                "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
@@ -68,7 +68,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         scheduleRepository.save(scheduleEntity);
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailSecondHour(),
                 "Mark",
-                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
+                "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
@@ -80,7 +80,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         scheduleRepository.save(scheduleEntity);
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailThirdHour(),
                 "Mark",
-                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
+                "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
@@ -92,7 +92,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         scheduleRepository.save(scheduleEntity);
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailForthHour(),
                 "Mark",
-                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
+                "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 

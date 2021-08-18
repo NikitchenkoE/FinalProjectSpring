@@ -25,14 +25,14 @@ public class RatingController {
         this.markService = markService;
     }
 
-    @GetMapping("/ratingMaste")
+    @GetMapping("/user/ratingMaste")
     public String ratingPage(Model model){
         model.addAttribute("markMaster", new RatingDTO());
         return "ratingPage";
     }
 
 
-    @GetMapping("/ratingMaster/{email}")
+    @GetMapping("/user/ratingMaster/{email}")
     public String ratingForm(Model model, @PathVariable(value = "email") String masterEmail){
         log.info("showed rating page");
         email=masterEmail;
