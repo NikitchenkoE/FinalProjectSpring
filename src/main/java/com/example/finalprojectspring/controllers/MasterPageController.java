@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +43,7 @@ public class MasterPageController {
     }
 
     @GetMapping("/master/myPages/{masterEmail}")
-    public String showMastersOnMasterPage(@PathVariable(value = "masterEmail") String masterMail, Model model, Pageable pageable) {
+    public String showMastersOnMasterPage(@PathVariable(value = "masterEmail") String masterMail, Model model, @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
         email = masterMail;
         log.info("Showed master page");
         return findPaginatedMaster(1, model);

@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +44,7 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUpPage")
-    public String showScheduleOnSignUpPage(Model model, Pageable pageable) {
+    public String showScheduleOnSignUpPage(Model model, @PageableDefault(sort = {"ID"}, direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("Showed signUp page");
         return findPaginatedMaster(1, model);
     }
