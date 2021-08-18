@@ -26,7 +26,8 @@ public class RatingController {
     }
 
     @GetMapping("/ratingMaste")
-    public String ratingPage(){
+    public String ratingPage(Model model){
+        model.addAttribute("markMaster", new RatingDTO());
         return "ratingPage";
     }
 
