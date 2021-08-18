@@ -66,6 +66,9 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setSecondHour(true);
         scheduleRepository.save(scheduleEntity);
+        emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailSecondHour(),
+                "Mark",
+                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
@@ -75,6 +78,9 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setThirdHour(true);
         scheduleRepository.save(scheduleEntity);
+        emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailThirdHour(),
+                "Mark",
+                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
@@ -84,6 +90,9 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setForthHour(true);
         scheduleRepository.save(scheduleEntity);
+        emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailForthHour(),
+                "Mark",
+                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
