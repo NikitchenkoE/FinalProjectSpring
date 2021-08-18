@@ -53,11 +53,11 @@ public class MasterPageController {
     public String findPaginatedMaster(@PathVariable(value = "pageNomber") int pageNo, Model model) {
         int pageSize = 10;
         Page<ScheduleDto> page = masterScheduleInterface.findPaginatedMasterSchedule(pageNo, pageSize, email);
-        List<ScheduleDto> listMasters = page.getContent();
+        List<ScheduleDto> listSchedule = page.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
-        model.addAttribute("listMasterSchedule", listMasters);
+        model.addAttribute("listMasterSchedule", listSchedule);
         return "masterPage";
     }
 //TODO chek bag with delete (cant delete in cause of foreign key)

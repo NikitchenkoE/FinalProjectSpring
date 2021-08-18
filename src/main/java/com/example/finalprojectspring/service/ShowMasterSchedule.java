@@ -3,6 +3,7 @@ package com.example.finalprojectspring.service;
 import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.interfaices.ShowMasterScheduleInterface;
+import com.example.finalprojectspring.mailService.EmailInterface;
 import com.example.finalprojectspring.repository.ScheduleRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,12 @@ import java.util.stream.Collectors;
 @Log4j
 public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     private final ScheduleRepository scheduleRepository;
+    private final EmailInterface emailInterface;
 
     @Autowired
-    public ShowMasterSchedule(ScheduleRepository scheduleRepository) {
+    public ShowMasterSchedule(ScheduleRepository scheduleRepository, EmailInterface emailInterface) {
         this.scheduleRepository = scheduleRepository;
+        this.emailInterface = emailInterface;
     }
 
     public Page<ScheduleDto> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail) {
@@ -51,6 +54,9 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setFirstHour(true);
         scheduleRepository.save(scheduleEntity);
+        emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailFirstHour(),
+                "Mark",
+                "http://localhost:8080/ratingMaster/"+scheduleEntity.getMasterEmail());
         return true;
     }
 
