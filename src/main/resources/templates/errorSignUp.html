@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
@@ -44,11 +44,17 @@
                   class="fa fa-home"></i>Admin</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" sec:authorize="hasRole('MASTER')" href="#" th:text="#{message.myPage}"
+             th:href="@{~/master/page/myMasterpage}"><i
+                  class="fa fa-home"></i>Admin</a>
+        </li>
+
       </ul>
 
       <div class="col-form-label">
-        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=ua">UA </a></button>
-        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=en">EN</a></button>
+<!--        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=ua">UA </a></button>-->
+<!--        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=en">EN</a></button>-->
         <button sec:authorize="isAnonymous()"
                 class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
           <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
@@ -66,7 +72,13 @@
   </nav>
 </div>
 
-<input id="expirationDate" type="datetime-local" name="expirationDate" class="small_medium"/>
+<div class="container text-center" size="1000px">
+  <h2 class="align-self-center">
+    Sorry, this date was booked by another customer a few minutes ago</h2>
+  <h2 class="align-self-center">
+    Вибачте, ця дата була заброньована іншим клієнтом кілька хвилин тому</h2>
+</div>
+
 
 </body>
 </html>

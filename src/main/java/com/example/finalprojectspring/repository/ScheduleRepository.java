@@ -16,4 +16,5 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity,Long> {
     Page<ScheduleEntity> findAllByMasterEmail(String email, Pageable pageable);
     void deleteByID(Long id);
     void removeByID(Long id);
+    ScheduleEntity findByID(Long id);
 }
