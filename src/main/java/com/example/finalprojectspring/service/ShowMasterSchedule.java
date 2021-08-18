@@ -45,6 +45,44 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
 
     }
 
+    @Transactional
+    public boolean setAsDoneFirstHour(ScheduleDto scheduleDto){
+        log.info("First hour set as done");
+        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+        scheduleEntity.setFirstHour(true);
+        scheduleRepository.save(scheduleEntity);
+        return true;
+    }
+
+    @Transactional
+    public boolean setAsDoneSecondHour(ScheduleDto scheduleDto){
+        log.info("First hour set as done");
+        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+        scheduleEntity.setSecondHour(true);
+        scheduleRepository.save(scheduleEntity);
+        return true;
+    }
+
+    @Transactional
+    public boolean setAsDoneThirdHour(ScheduleDto scheduleDto){
+        log.info("First hour set as done");
+        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+        scheduleEntity.setThirdHour(true);
+        scheduleRepository.save(scheduleEntity);
+        return true;
+    }
+
+    @Transactional
+    public boolean setAsDoneForthHour(ScheduleDto scheduleDto){
+        log.info("First hour set as done");
+        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+        scheduleEntity.setForthHour(true);
+        scheduleRepository.save(scheduleEntity);
+        return true;
+    }
+
+
+
     private ScheduleDto scheduleEntityToScheduleDto (ScheduleEntity scheduleEntity){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
                 .withLocale(Locale.UK)

@@ -69,5 +69,36 @@ public class MasterPageController {
         return "redirect:/master/myPages";
     }
 
+    @GetMapping("/master/setDone/firstHour/{sheduleId}")
+    public String setDoneFirstHour(@PathVariable(value = "sheduleId") Long scheduleId){
+        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        masterScheduleInterface.setAsDoneFirstHour(scheduleDto);
+        return "redirect:/master/myPages";
+    }
+
+    @GetMapping("/master/setDone/secondHour/{sheduleId}")
+    public String setDoneSecondHour(@PathVariable(value = "sheduleId") Long scheduleId){
+        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        masterScheduleInterface.setAsDoneSecondHour(scheduleDto);
+        return "redirect:/master/myPages";
+    }
+
+    @GetMapping("/master/setDone/thirdHour/{sheduleId}")
+    public String setDoneThirdHour(@PathVariable(value = "sheduleId") Long scheduleId){
+        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        masterScheduleInterface.setAsDoneThirdHour(scheduleDto);
+        return "redirect:/master/myPages";
+    }
+
+    @GetMapping("/master/setDone/forthHour/{sheduleId}")
+    public String setDoneForthHour(@PathVariable(value = "sheduleId") Long scheduleId){
+        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        masterScheduleInterface.setAsDoneForthHour(scheduleDto);
+        return "redirect:/master/myPages";
+    }
+
+
+
+
 
 }

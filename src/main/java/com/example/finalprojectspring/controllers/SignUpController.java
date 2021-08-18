@@ -1,7 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
-import com.example.finalprojectspring.service.SignUpServiceInterface;
+import com.example.finalprojectspring.interfaices.SignUpServiceInterface;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,11 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
@@ -62,9 +60,8 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUp/firstHour/{scheduleId}")
-    public String signUpFirstHour(@PathVariable(value = "scheduleId") Long scheduleId,
-                                  @Valid ScheduleDto scheduleDto) {
-        scheduleDto = ScheduleDto.builder()
+    public String signUpFirstHour(@PathVariable(value = "scheduleId") Long scheduleId) {
+        ScheduleDto scheduleDto = ScheduleDto.builder()
                 .id(scheduleId)
                 .clientEmailFirstHour(userEmail)
                 .build();

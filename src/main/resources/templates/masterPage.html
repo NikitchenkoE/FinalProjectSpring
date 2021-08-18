@@ -91,23 +91,28 @@
                     <td th:text="${master.workDay}"></td>
                     <td>
                         <p th:if="${master.firstHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a th:unless="${master.firstHour.booleanValue()}"  th:text="#{message.disable}">Mark As Done</a>
+                        <a th:unless="${master.firstHour.booleanValue()}" th:text="#{message.disable}"
+                           th:href="@{'/master/setDone/firstHour/' + ${master.id}}">Mark As Done</a>
                     </td>
                     <td>
                         <p th:if="${master.secondHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a th:unless="${master.secondHour.booleanValue()}"  th:text="#{message.disable}" >Mark As Done</a>
+                        <a th:unless="${master.secondHour.booleanValue()}" th:text="#{message.disable}"
+                           th:href="@{'/master/setDone/secondHour/' + ${master.id}}">Mark As Done</a>
                     </td>
                     <td>
                         <p th:if="${master.thirdHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a th:unless="${master.thirdHour.booleanValue()}"  th:text="#{message.disable}">Mark As Done</a>
+                        <a th:unless="${master.thirdHour.booleanValue()}" th:text="#{message.disable}"
+                           th:href="@{'/master/setDone/thirdHour/' + ${master.id}}">Mark As Done</a>
                     </td>
                     <td>
                         <p th:if="${master.forthHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a th:unless="${master.forthHour.booleanValue()}"  th:text="#{message.disable}" th:href="@{''}" >Mark As Done</a>
+                        <a th:unless="${master.forthHour.booleanValue()}" th:text="#{message.disable}"
+                           th:href="@{'/master/setDone/forthHour/' + ${master.id}}">Mark As Done</a>
                     </td>
 
                     <td>
-                        <a th:href="@{'/master/page/myMasterpage/' + ${master.id}}" th:text="#{message.input.delete}"> </a>
+                        <a th:href="@{'/master/page/myMasterpage/' + ${master.id}}"
+                           th:text="#{message.input.delete}"> </a>
                     </td>
                 </tr>
                 </tbody>
@@ -138,7 +143,6 @@
 
     </div>
 </div>
-
 
 
 </body>

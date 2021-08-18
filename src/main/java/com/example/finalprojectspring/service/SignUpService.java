@@ -2,6 +2,7 @@ package com.example.finalprojectspring.service;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.entities.ScheduleEntity;
+import com.example.finalprojectspring.interfaices.SignUpServiceInterface;
 import com.example.finalprojectspring.repository.ScheduleRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
