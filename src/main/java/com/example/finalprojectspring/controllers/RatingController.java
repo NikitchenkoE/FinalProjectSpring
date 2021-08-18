@@ -25,6 +25,12 @@ public class RatingController {
         this.markService = markService;
     }
 
+    @GetMapping("/ratingMaste")
+    public String ratingPage(){
+        return "ratingPage";
+    }
+
+
     @GetMapping("/ratingMaster/{email}")
     public String ratingForm(Model model, @PathVariable(value = "email") String masterEmail){
         log.info("showed rating page");
