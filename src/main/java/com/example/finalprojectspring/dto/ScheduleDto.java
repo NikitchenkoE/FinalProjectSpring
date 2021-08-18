@@ -13,15 +13,17 @@ import java.util.Date;
 @Builder
 @ToString
 public class ScheduleDto {
+
+    Long id;
     @NotNull
     private String workDay;
 
     private String masterEmail;
 
-    private Long clientIdFirstHour;
-    private Long clientIdSecondHour;
-    private Long clientIdThirdHour;
-    private Long clientIdForthHour;
+    private String clientEmailFirstHour;
+    private String clientEmailSecondHour;
+    private String clientEmailThirdHour;
+    private String clientEmailForthHour;
 
     private Boolean firstHour;
     private Boolean secondHour;

@@ -44,6 +44,12 @@
                             class="fa fa-home"></i>Admin</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('MASTER')" href="#" th:text="#{message.myPage}"
+                       th:href="@{~/master/page/myMasterpage}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
             </ul>
 
             <div class="col-form-label">

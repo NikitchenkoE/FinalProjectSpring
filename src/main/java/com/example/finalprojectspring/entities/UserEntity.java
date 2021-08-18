@@ -43,7 +43,7 @@ public class UserEntity {
     @JoinColumn(name = "occupation_id")
     private MasterOcupationEntity occupation;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     List<ScheduleEntity> schedule;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

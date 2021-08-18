@@ -1,11 +1,10 @@
 package com.example.finalprojectspring.entities;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -27,14 +26,18 @@ public class ScheduleEntity {
 
     private String masterEmail;
 
-    private Long clientIdFirstHour;
-    private Long clientIdSecondHour;
-    private Long clientIdThirdHour;
-    private Long clientIdForthHour;
+    private String clientEmailFirstHour;
+    private String clientEmailSecondHour;
+    private String clientEmailThirdHour;
+    private String clientEmailForthHour;
 
     private Boolean firstHour;
     private Boolean secondHour;
     private Boolean thirdHour;
     private Boolean forthHour;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserEntity userEntity;
 
 }
