@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Beauty Salon</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{~/main}" th:text="#{message.general.home}">
+                        <i class="fa fa-home"></i>Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" href="#" th:text="#{message.registration}"
+                       th:href="@{~/registration}"><i
+                            class="fa fa-home"></i>Registration</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="#" th:text="#{message.input.Admin}"
+                       th:href="@{~/admin}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="#" th:text="#{message.add.new.master}"
+                       th:href="@{~/admin/add/master}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" href="#" th:text="#{message.list.masters}"
+                       th:href="@{~/admin/list/masters}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('MASTER')" href="#" th:text="#{message.myPage}"
+                       th:href="@{~/master/page/myMasterpage}"><i
+                            class="fa fa-home"></i>Admin</a>
+                </li>
+
+            </ul>
+
+            <div class="col-form-label">
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/user/myPage?lang=ua">UA </a></button>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/user/myPage?lang=en">EN</a></button>
+                <button sec:authorize="isAnonymous()"
+                        class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
+                    <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
+                            class="fa fa-home"></i>Login</a>
+                </button>
+            </div>
+
+            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm"
+                        type="submit" th:text="#{message.logout}">Logout
+                </button>
+            </form>
+
+        </div>
+    </nav>
+</div>
+<div class="container text-left" size="1000px">
+
+<h1 th:text="#{message.show.userPage}"></h1>
+<div th:switch="${user}">
+    <p><a th:text="#{message.show.userName}"></a> <a th:text="${user.firstName}"></a></p>
+    <p><a th:text="#{message.show.userSurname}"></a> <a th:text="${user.lastName}"></a></p>
+    <p><a th:text="#{message.show.money}"></a> <a th:text="${user.money}"></a></p>
+</div>
+
+<form th:action="@{/processAddMoney}" th:object="${user}"
+      method="post" style="max-width: 600px; margin: 0 auto;">
+    <div class="form-group row">
+        <label class="col-4 col-form-label" th:text="#{message.show.addMoney}">Add money: </label>
+        <div class="col-8">
+            <input type="number" th:field="*{money}" class="form-control" />
+            <div style="color:red">
+                <p th:if="${#fields.hasErrors('money')}" th:errorclass="error" th:errors="*{money}" th:text="#{message.show.negativNumber}"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary" th:text="#{message.login.submit}">Sign Up</button>
+    </div>
+
+</form>
+</div>
+
+</body>
+</html>
