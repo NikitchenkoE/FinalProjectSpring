@@ -35,6 +35,7 @@ class RegistrationServiceTest {
                 .firstName("test")
                 .lastName("test")
                 .roles(Collections.singleton(Role_Of_Users.ROLE_USER))
+                .money(0)
                 .build();
         registrationService.addUserToDataBase(userEntityDTO);
         UserEntity userEntity = repository.findByEmail("testmail@gmail.com");
@@ -52,6 +53,7 @@ class RegistrationServiceTest {
                 .lastName("test")
                 .roles(Collections.singleton(Role_Of_Users.ROLE_ADMIN))
                 .occupation("testMaster")
+                .money(0)
                 .build();
         Boolean usrPresent = registrationService.userPresentInDb(userEntityDTO);
         assertThat(usrPresent).isTrue();

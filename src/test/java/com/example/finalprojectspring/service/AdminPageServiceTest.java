@@ -42,6 +42,7 @@ class AdminPageServiceTest {
                 .lastName("test")
                 .roles(Collections.singleton(Role_Of_Users.ROLE_MASTER))
                 .occupation("testMaster")
+                .money(0)
                 .build();
 
         adminPageService.createNewMaster(userEntityDTO);
@@ -70,6 +71,7 @@ class AdminPageServiceTest {
                 .lastName("test")
                 .roles(Collections.singleton(Role_Of_Users.ROLE_ADMIN))
                 .occupation("testMaster")
+                .money(0)
                 .build();
         Boolean usrpresent = adminPageService.userPresentInDb(userEntityDTO);
         assertThat(usrpresent).isTrue();
