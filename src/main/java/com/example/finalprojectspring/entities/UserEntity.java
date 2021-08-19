@@ -49,4 +49,7 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Rating> ratings;
 
+    @Column(name = "money", nullable = false, length = 20)
+    private double money;
+
 }

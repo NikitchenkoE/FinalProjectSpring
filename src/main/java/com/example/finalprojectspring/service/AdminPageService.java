@@ -56,6 +56,7 @@ public class AdminPageService implements IAdminPageService {
                 .lastName(userEntityDTO.getLastName())
                 .roles(userEntityDTO.getRoles())
                 .occupation(occupation)
+                .money(userEntityDTO.getMoney())
                 .build();
 
         userRepository.save(userEntity);

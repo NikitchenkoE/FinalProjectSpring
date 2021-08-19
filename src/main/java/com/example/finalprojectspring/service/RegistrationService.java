@@ -34,6 +34,7 @@ public class RegistrationService implements IRegistrationInterf {
                 .firstName(userEntityDTO.getFirstName())
                 .lastName(userEntityDTO.getLastName())
                 .roles(userEntityDTO.getRoles())
+                .money(userEntityDTO.getMoney())
                 .build();
         userRepository.save(userEntity);
         return userEntity;

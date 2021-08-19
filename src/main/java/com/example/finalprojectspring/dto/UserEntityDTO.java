@@ -6,10 +6,7 @@ import com.example.finalprojectspring.validation.ValidPassword;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
 
@@ -44,4 +41,7 @@ public class UserEntityDTO {
     private String occupation;
 
     private double averageRating;
+
+    @DecimalMin(value = "0.0", message = "Your value must be greater than 1")
+    private double money;
 }

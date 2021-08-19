@@ -105,6 +105,7 @@ public class AdminPageController {
         }
 
         master.setRoles(Collections.singleton(Role_Of_Users.ROLE_MASTER));
+        master.setMoney(0.0);
         iAdminPageService.createNewMaster(master);
 
         return "redirect:/admin";
