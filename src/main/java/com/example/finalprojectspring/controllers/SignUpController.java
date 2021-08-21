@@ -1,6 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import com.example.finalprojectspring.interfaices.SignUpServiceInterface;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUp/firstHour/{scheduleId}")
-    public String signUpFirstHour(@PathVariable(value = "scheduleId") Long scheduleId) {
+    public String signUpFirstHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
         ScheduleDto scheduleDto = ScheduleDto.builder()
                 .id(scheduleId)
                 .clientEmailFirstHour(userEmail)
@@ -75,10 +76,10 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUp/secondHour/{scheduleId}")
-    public String signUpSecondHour(@PathVariable(value = "scheduleId") Long scheduleId) {
+    public String signUpSecondHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
         ScheduleDto scheduleDto = ScheduleDto.builder()
                 .id(scheduleId)
-                .clientEmailFirstHour(userEmail)
+                .clientEmailSecondHour(userEmail)
                 .build();
         if (signUpServiceInterface.secondHourAlreadyBooked(scheduleDto)) {
             log.error("Error date already booked");
@@ -89,10 +90,10 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUp/thirdHour/{scheduleId}")
-    public String signUpThirdHour(@PathVariable(value = "scheduleId") Long scheduleId) {
+    public String signUpThirdHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
         ScheduleDto scheduleDto = ScheduleDto.builder()
                 .id(scheduleId)
-                .clientEmailFirstHour(userEmail)
+                .clientEmailThirdHour(userEmail)
                 .build();
         if (signUpServiceInterface.thirdHourAlreadyBooked(scheduleDto)) {
             log.error("Error date already booked");
@@ -103,10 +104,10 @@ public class SignUpController {
     }
 
     @GetMapping("/user/signUp/forthHour/{scheduleId}")
-    public String signUpForthHour(@PathVariable(value = "scheduleId") Long scheduleId) {
+    public String signUpForthHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
         ScheduleDto scheduleDto = ScheduleDto.builder()
                 .id(scheduleId)
-                .clientEmailFirstHour(userEmail)
+                .clientEmailForthHour(userEmail)
                 .build();
         if (signUpServiceInterface.forthHourAlreadyBooked(scheduleDto)) {
             log.error("Error date already booked");

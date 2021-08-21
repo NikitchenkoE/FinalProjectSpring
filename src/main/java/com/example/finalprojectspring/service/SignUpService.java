@@ -2,6 +2,7 @@ package com.example.finalprojectspring.service;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.entities.ScheduleEntity;
+import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import com.example.finalprojectspring.interfaices.SignUpServiceInterface;
 import com.example.finalprojectspring.repository.ScheduleRepository;
 import lombok.extern.log4j.Log4j;
@@ -26,73 +27,91 @@ import java.util.stream.Collectors;
 public class SignUpService implements SignUpServiceInterface {
 
     private final ScheduleRepository scheduleRepository;
+    private final MoneyServiceInterface moneyService;
 
     @Autowired
-    public SignUpService(ScheduleRepository scheduleRepository) {
+    public SignUpService(ScheduleRepository scheduleRepository, MoneyServiceInterface moneyService) {
         this.scheduleRepository = scheduleRepository;
+        this.moneyService = moneyService;
     }
 
     @Transactional
-    public ScheduleEntity setFirstHour(ScheduleDto scheduleDto) {
+    public boolean setFirstHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp first hour");
-        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setFirstHour(false);
-        scheduleEntity.setClientEmailFirstHour(scheduleDto.getClientEmailFirstHour());
-        scheduleRepository.save(scheduleEntity);
-        return scheduleEntity;
+        boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailFirstHour());
+        if (paymentSuccessful) {
+            ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+            scheduleEntity.setFirstHour(false);
+            scheduleEntity.setClientEmailFirstHour(scheduleDto.getClientEmailFirstHour());
+            scheduleRepository.save(scheduleEntity);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
-    public ScheduleEntity setSecondHour(ScheduleDto scheduleDto) {
+    public boolean setSecondHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp second hour");
+        boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailSecondHour());
+        if (paymentSuccessful) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setSecondHour(false);
         scheduleEntity.setClientEmailSecondHour(scheduleDto.getClientEmailSecondHour());
         scheduleRepository.save(scheduleEntity);
-        return scheduleEntity;
+        return true;
+        }
+        return false;
     }
 
     @Transactional
-    public ScheduleEntity setThirdHour(ScheduleDto scheduleDto) {
+    public boolean setThirdHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp third hour");
-        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setThirdHour(false);
-        scheduleEntity.setClientEmailThirdHour(scheduleDto.getClientEmailThirdHour());
-        scheduleRepository.save(scheduleEntity);
-        return scheduleEntity;
+        boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailThirdHour());
+        if (paymentSuccessful) {
+            ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+            scheduleEntity.setThirdHour(false);
+            scheduleEntity.setClientEmailThirdHour(scheduleDto.getClientEmailThirdHour());
+            scheduleRepository.save(scheduleEntity);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
-    public ScheduleEntity setForthHour(ScheduleDto scheduleDto) {
+    public boolean setForthHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp forth hour");
-        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setForthHour(false);
-        scheduleEntity.setClientEmailForthHour(scheduleDto.getClientEmailForthHour());
-        scheduleRepository.save(scheduleEntity);
-        return scheduleEntity;
+        boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailForthHour());
+        if (paymentSuccessful) {
+            ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+            scheduleEntity.setForthHour(false);
+            scheduleEntity.setClientEmailForthHour(scheduleDto.getClientEmailForthHour());
+            scheduleRepository.save(scheduleEntity);
+            return true;
+        }
+        return false;
     }
 
-    public boolean firstHourAlreadyBooked(ScheduleDto scheduleDto){
+    public boolean firstHourAlreadyBooked(ScheduleDto scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        Optional<String> present= Optional.ofNullable(scheduleEntity.getClientEmailFirstHour());
+        Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailFirstHour());
         return present.isPresent();
     }
 
-    public boolean secondHourAlreadyBooked(ScheduleDto scheduleDto){
+    public boolean secondHourAlreadyBooked(ScheduleDto scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        Optional<String> present= Optional.ofNullable(scheduleEntity.getClientEmailSecondHour());
+        Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailSecondHour());
         return present.isPresent();
     }
 
-    public boolean thirdHourAlreadyBooked(ScheduleDto scheduleDto){
+    public boolean thirdHourAlreadyBooked(ScheduleDto scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        Optional<String> present= Optional.ofNullable(scheduleEntity.getClientEmailThirdHour());
+        Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailThirdHour());
         return present.isPresent();
     }
 
-    public boolean forthHourAlreadyBooked(ScheduleDto scheduleDto){
+    public boolean forthHourAlreadyBooked(ScheduleDto scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        Optional<String> present= Optional.ofNullable(scheduleEntity.getClientEmailForthHour());
+        Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailForthHour());
         return present.isPresent();
     }
 

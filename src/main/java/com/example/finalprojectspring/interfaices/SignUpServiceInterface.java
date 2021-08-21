@@ -2,17 +2,18 @@ package com.example.finalprojectspring.interfaices;
 
 import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.entities.ScheduleEntity;
+import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import org.springframework.data.domain.Page;
 
 public interface SignUpServiceInterface {
 
-    ScheduleEntity setFirstHour(ScheduleDto scheduleDto);
+    boolean setFirstHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException;
 
-    ScheduleEntity setSecondHour(ScheduleDto scheduleDto);
+    boolean setSecondHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException;
 
-    ScheduleEntity setThirdHour(ScheduleDto scheduleDto);
+    boolean setThirdHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException;
 
-    ScheduleEntity setForthHour(ScheduleDto scheduleDto);
+    boolean setForthHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException;
 
     Page<ScheduleDto> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail);
 

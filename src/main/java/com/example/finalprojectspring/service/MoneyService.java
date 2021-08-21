@@ -34,15 +34,15 @@ public class MoneyService implements  MoneyServiceInterface {
         UserEntity userSender = userRepository.findByEmail(senderEmail);
         UserEntity userReceiver = userRepository.findByEmail(receiverEmail);
         double senderNewMoney = userSender.getMoney() - sum;
-
         if (senderNewMoney<0){
             throw new NotEnoughMoneyException("Sorry, you haven't enough money");
+        }else {
+            userSender.setMoney(senderNewMoney);
+            userReceiver.setMoney(userReceiver.getMoney() + sum);
+            userRepository.save(userSender);
+            userRepository.save(userReceiver);
+            return true;
         }
-        userSender.setMoney(senderNewMoney);
-        userReceiver.setMoney(userReceiver.getMoney()+sum);
-        userRepository.save(userSender);
-        userRepository.save(userReceiver);
-        return true;
     }
 
     @Override

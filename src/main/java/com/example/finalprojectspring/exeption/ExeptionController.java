@@ -18,4 +18,10 @@ public class ExeptionController {
         logger.error("Request " + request.getRequestURL() + " Threw an Exception", e);
         return "error";
     }
+
+    @ExceptionHandler(value = NotEnoughMoneyException.class)
+    public String handleExceptionNotEnoghMoney(HttpServletRequest request, Exception e) {
+        logger.error("Request " + request.getRequestURL() + " Threw an Exception", e);
+        return "errorNotEnoughMoney";
+    }
 }
