@@ -1,4 +1,4 @@
-package com.example.finalprojectspring.service;
+package com.example.finalprojectspring.interfaices;
 
 import com.example.finalprojectspring.dto.UserEntityDtoMoney;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
