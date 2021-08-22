@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.controllers;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import com.example.finalprojectspring.interfaices.SignUpServiceInterface;
 import lombok.extern.log4j.Log4j;
@@ -51,8 +51,8 @@ public class SignUpController {
     @GetMapping("/user/signUpPages/{pageNomber}")
     public String findPaginatedMaster(@PathVariable(value = "pageNomber") int pageNo, Model model) {
         int pageSize = 10;
-        Page<ScheduleDto> page = signUpServiceInterface.findPaginatedMasterSchedule(pageNo, pageSize, masterEmail);
-        List<ScheduleDto> listSchedule = page.getContent();
+        Page<ScheduleDTO> page = signUpServiceInterface.findPaginatedMasterSchedule(pageNo, pageSize, masterEmail);
+        List<ScheduleDTO> listSchedule = page.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -62,7 +62,7 @@ public class SignUpController {
 
     @GetMapping("/user/signUp/firstHour/{scheduleId}")
     public String signUpFirstHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
-        ScheduleDto scheduleDto = ScheduleDto.builder()
+        ScheduleDTO scheduleDto = ScheduleDTO.builder()
                 .id(scheduleId)
                 .clientEmailFirstHour(userEmail)
                 .build();
@@ -77,7 +77,7 @@ public class SignUpController {
 
     @GetMapping("/user/signUp/secondHour/{scheduleId}")
     public String signUpSecondHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
-        ScheduleDto scheduleDto = ScheduleDto.builder()
+        ScheduleDTO scheduleDto = ScheduleDTO.builder()
                 .id(scheduleId)
                 .clientEmailSecondHour(userEmail)
                 .build();
@@ -91,7 +91,7 @@ public class SignUpController {
 
     @GetMapping("/user/signUp/thirdHour/{scheduleId}")
     public String signUpThirdHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
-        ScheduleDto scheduleDto = ScheduleDto.builder()
+        ScheduleDTO scheduleDto = ScheduleDTO.builder()
                 .id(scheduleId)
                 .clientEmailThirdHour(userEmail)
                 .build();
@@ -105,7 +105,7 @@ public class SignUpController {
 
     @GetMapping("/user/signUp/forthHour/{scheduleId}")
     public String signUpForthHour(@PathVariable(value = "scheduleId") Long scheduleId) throws NotEnoughMoneyException {
-        ScheduleDto scheduleDto = ScheduleDto.builder()
+        ScheduleDTO scheduleDto = ScheduleDTO.builder()
                 .id(scheduleId)
                 .clientEmailForthHour(userEmail)
                 .build();

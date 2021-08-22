@@ -1,10 +1,8 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.MasterOcupationEntity;
 import com.example.finalprojectspring.entities.Role_Of_Users;
-import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
@@ -37,19 +35,18 @@ public class AdminPageService implements IAdminPageService {
     @Transactional
     public void deleteUserByEmail(String email) {
         log.info("user deleted");
-        final Optional<UserEntity> existenceUserByEmail =
-                Optional.ofNullable(Optional.ofNullable(userRepository.findByEmail(email)).
-                        orElseThrow(() ->
-                                new ApiRequestExeption("This user do not exist or already deleted")));
-        userRepository.deleteByEmail(email);
+        final UserEntity existenceUserByEmail =
+                Optional.ofNullable(userRepository.findByEmail(email))
+                        .orElseThrow(() -> new ApiRequestExeption("This user do not exist or already deleted"));
+        userRepository.delete(existenceUserByEmail);
     }
 
     @Transactional
-    public UserEntity createNewMaster(UserEntityDTO userEntityDTO) {
+    public boolean createNewMaster(UserEntityDTO userEntityDTO) {
         log.info("Added new master");
         MasterOcupationEntity occupation = new MasterOcupationEntity();
         occupation.setOcupation(userEntityDTO.getOccupation());
-        UserEntity userEntity = new UserEntity().builder()
+        UserEntity userEntity = UserEntity.builder()
                 .email(userEntityDTO.getEmail())
                 .password(passwordEncoder.encode(userEntityDTO.getPassword()))
                 .firstName(userEntityDTO.getFirstName())
@@ -60,12 +57,12 @@ public class AdminPageService implements IAdminPageService {
                 .build();
 
         userRepository.save(userEntity);
-        return userEntity;
+        return true;
     }
 
     public boolean userPresentInDb(UserEntityDTO userEntityDTO) {
         log.error("User present in db");
-        final Optional<UserEntity> existenceUserByEmail =
+        Optional<UserEntity> existenceUserByEmail =
                 Optional.ofNullable(userRepository.findByEmail(userEntityDTO.getEmail()));
         return existenceUserByEmail.isPresent();
     }
@@ -79,7 +76,6 @@ public class AdminPageService implements IAdminPageService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
     }
-
 
 
 }

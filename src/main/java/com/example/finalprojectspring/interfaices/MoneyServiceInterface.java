@@ -1,15 +1,15 @@
 package com.example.finalprojectspring.interfaices;
 
-import com.example.finalprojectspring.dto.UserEntityDtoMoney;
+import com.example.finalprojectspring.dto.MoneyDTO;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface MoneyServiceInterface {
     @Transactional
-    boolean replenishMoneyAccount(UserEntityDtoMoney userEntityDtoMoney);
+    boolean replenishMoneyAccount(MoneyDTO moneyDTO);
 
     @Transactional
     boolean sentMoneyToAnotherUser(double sum, String receiverEmail, String senderEmail) throws NotEnoughMoneyException;
 
-    UserEntityDtoMoney showUserByEmail(String email);
+    MoneyDTO showUserByEmail(String email);
 }

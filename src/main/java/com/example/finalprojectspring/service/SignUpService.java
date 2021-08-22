@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import com.example.finalprojectspring.interfaices.MoneyServiceInterface;
@@ -37,7 +37,7 @@ public class SignUpService implements SignUpServiceInterface {
     }
 
     @Transactional
-    public boolean setFirstHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
+    public boolean setFirstHour(ScheduleDTO scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp first hour");
         boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailFirstHour());
         if (paymentSuccessful) {
@@ -51,7 +51,7 @@ public class SignUpService implements SignUpServiceInterface {
     }
 
     @Transactional
-    public boolean setSecondHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
+    public boolean setSecondHour(ScheduleDTO scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp second hour");
         boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailSecondHour());
         if (paymentSuccessful) {
@@ -65,7 +65,7 @@ public class SignUpService implements SignUpServiceInterface {
     }
 
     @Transactional
-    public boolean setThirdHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
+    public boolean setThirdHour(ScheduleDTO scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp third hour");
         boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailThirdHour());
         if (paymentSuccessful) {
@@ -79,7 +79,7 @@ public class SignUpService implements SignUpServiceInterface {
     }
 
     @Transactional
-    public boolean setForthHour(ScheduleDto scheduleDto) throws NotEnoughMoneyException {
+    public boolean setForthHour(ScheduleDTO scheduleDto) throws NotEnoughMoneyException {
         log.info("client signUp forth hour");
         boolean paymentSuccessful = moneyService.sentMoneyToAnotherUser(500,"admin@gmail.com",scheduleDto.getClientEmailForthHour());
         if (paymentSuccessful) {
@@ -92,46 +92,45 @@ public class SignUpService implements SignUpServiceInterface {
         return false;
     }
 
-    public boolean firstHourAlreadyBooked(ScheduleDto scheduleDto) {
+    public boolean firstHourAlreadyBooked(ScheduleDTO scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailFirstHour());
         return present.isPresent();
     }
 
-    public boolean secondHourAlreadyBooked(ScheduleDto scheduleDto) {
+    public boolean secondHourAlreadyBooked(ScheduleDTO scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailSecondHour());
         return present.isPresent();
     }
 
-    public boolean thirdHourAlreadyBooked(ScheduleDto scheduleDto) {
+    public boolean thirdHourAlreadyBooked(ScheduleDTO scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailThirdHour());
         return present.isPresent();
     }
 
-    public boolean forthHourAlreadyBooked(ScheduleDto scheduleDto) {
+    public boolean forthHourAlreadyBooked(ScheduleDTO scheduleDto) {
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         Optional<String> present = Optional.ofNullable(scheduleEntity.getClientEmailForthHour());
         return present.isPresent();
     }
 
-    public Page<ScheduleDto> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail) {
+    public Page<ScheduleDTO> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<ScheduleEntity> scheduleEntityPage = this.scheduleRepository.findAllByMasterEmail(masterEmail, pageable);
-        Page<ScheduleDto> sorted = new PageImpl<>(scheduleEntityPage.stream()
+        return new PageImpl<>(scheduleEntityPage.stream()
                 .map(this::scheduleEntityToScheduleDto)
                 .collect(Collectors.toList()), pageable, scheduleEntityPage.getTotalElements());
-        return sorted;
     }
 
-    private ScheduleDto scheduleEntityToScheduleDto(ScheduleEntity scheduleEntity) {
+    private ScheduleDTO scheduleEntityToScheduleDto(ScheduleEntity scheduleEntity) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
                 .withLocale(Locale.UK)
                 .withZone(ZoneId.systemDefault());
         Timestamp timestamp = scheduleEntity.getWorkDay();
         String timeStampToString = dateTimeFormatter.format(timestamp.toInstant());
-        ScheduleDto scheduleDto = new ScheduleDto().builder()
+        return ScheduleDTO.builder()
                 .id(scheduleEntity.getID())
                 .masterEmail(scheduleEntity.getMasterEmail())
                 .workDay(timeStampToString)
@@ -144,7 +143,6 @@ public class SignUpService implements SignUpServiceInterface {
                 .thirdHour(scheduleEntity.getThirdHour())
                 .forthHour(scheduleEntity.getForthHour())
                 .build();
-        return scheduleDto;
     }
 
 

@@ -9,7 +9,7 @@ import java.util.Collection;
 
 
 public class UserPrincipal implements UserDetails {
-    private UserEntity userEntity;
+    private final UserEntity userEntity;
 
     public UserPrincipal(UserEntity userEntity) {
         this.userEntity = userEntity;

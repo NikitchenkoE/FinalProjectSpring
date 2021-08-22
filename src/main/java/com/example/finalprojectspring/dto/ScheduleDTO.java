@@ -3,8 +3,6 @@ package com.example.finalprojectspring.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -12,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @ToString
-public class ScheduleDto {
+public class ScheduleDTO {
 
     Long id;
     @NotNull

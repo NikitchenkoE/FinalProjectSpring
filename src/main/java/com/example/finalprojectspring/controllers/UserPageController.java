@@ -1,8 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
-import com.example.finalprojectspring.dto.UserEntityDTO;
-import com.example.finalprojectspring.dto.UserEntityDtoMoney;
-import com.example.finalprojectspring.service.MoneyServiceInterface;
+import com.example.finalprojectspring.dto.MoneyDTO;
+import com.example.finalprojectspring.interfaices.MoneyServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,15 +33,15 @@ public class UserPageController {
     }
 
     @GetMapping("/user/myPage")
-    public String myPage(Model model, UserEntityDtoMoney userEntityDTOMoney){
-        userEntityDTOMoney = moneyServiceInterface.showUserByEmail(userEmail);
-        model.addAttribute("user",userEntityDTOMoney);
+    public String myPage(Model model, MoneyDTO moneyDTO){
+        moneyDTO = moneyServiceInterface.showUserByEmail(userEmail);
+        model.addAttribute("user", moneyDTO);
         return "userPage";
     }
 
     @PostMapping("/processAddMoney")
-    public String processRegister(@ModelAttribute("user") @Valid UserEntityDtoMoney user,
-                                  BindingResult bindingResultUserPage, Model model) {
+    public String processRegister(@ModelAttribute("user") @Valid MoneyDTO user,
+                                  BindingResult bindingResultUserPage) {
         if (bindingResultUserPage.hasErrors()) {
             return "userPage";
         }

@@ -1,11 +1,11 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.UserEntityDtoMoney;
+import com.example.finalprojectspring.dto.MoneyDTO;
+import com.example.finalprojectspring.entities.Rating;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
 import com.example.finalprojectspring.interfaices.MoneyServiceInterface;
 import com.example.finalprojectspring.repository.UserRepository;
-import com.sun.tools.javac.util.Log;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +24,10 @@ public class MoneyService implements MoneyServiceInterface {
 
     @Override
     @Transactional
-    public boolean replenishMoneyAccount(UserEntityDtoMoney userEntityDtoMoney){
-        log.info("Added money to account " + userEntityDtoMoney.getEmail());
-        UserEntity userEntity = userRepository.findByEmail(userEntityDtoMoney.getEmail());
-        userEntity.setMoney(userEntity.getMoney() + userEntityDtoMoney.getMoney());
+    public boolean replenishMoneyAccount(MoneyDTO moneyDTO){
+        log.info("Added money to account " + moneyDTO.getEmail());
+        UserEntity userEntity = userRepository.findByEmail(moneyDTO.getEmail());
+        userEntity.setMoney(userEntity.getMoney() + moneyDTO.getMoney());
         userRepository.save(userEntity);
         return true;
     }
@@ -51,24 +51,23 @@ public class MoneyService implements MoneyServiceInterface {
     }
 
     @Override
-    public UserEntityDtoMoney showUserByEmail(String email){
+    public MoneyDTO showUserByEmail(String email){
         UserEntity userEntity = userRepository.findByEmail(email);
         return userEntityToUserEntityDtoMoney(userEntity);
     }
 
 
-    private UserEntityDtoMoney userEntityToUserEntityDtoMoney(UserEntity userEntity) {
-        UserEntityDtoMoney userEntityDTOMoney = new UserEntityDtoMoney().builder()
+    private MoneyDTO userEntityToUserEntityDtoMoney(UserEntity userEntity) {
+        return MoneyDTO.builder()
                 .email(userEntity.getEmail())
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .roles(userEntity.getRoles())
                 .averageRating(userEntity.getRatings().stream()
-                        .mapToDouble(rating -> rating.getRating())
+                        .mapToDouble(Rating::getRating)
                         .average()
                         .orElse(0.0))
                 .money(userEntity.getMoney())
                 .build();
-        return userEntityDTOMoney;
     }
 }

@@ -1,12 +1,9 @@
 package com.example.finalprojectspring.entities;
 
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 @ToString
@@ -16,11 +13,8 @@ import java.util.Date;
 @Getter
 @Builder
 @Entity
-public class ScheduleEntity {
+public class ScheduleEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long ID;
 
     private Timestamp workDay;
 
@@ -36,8 +30,6 @@ public class ScheduleEntity {
     private Boolean thirdHour;
     private Boolean forthHour;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserEntity userEntity;
+
 
 }

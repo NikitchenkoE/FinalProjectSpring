@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.controllers;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import com.example.finalprojectspring.interfaices.ShowMasterScheduleInterface;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +52,8 @@ public class MasterPageController {
     @GetMapping("/master/myPage/{pageNomber}")
     public String findPaginatedMaster(@PathVariable(value = "pageNomber") int pageNo, Model model) {
         int pageSize = 10;
-        Page<ScheduleDto> page = masterScheduleInterface.findPaginatedMasterSchedule(pageNo, pageSize, email);
-        List<ScheduleDto> listSchedule = page.getContent();
+        Page<ScheduleDTO> page = masterScheduleInterface.findPaginatedMasterSchedule(pageNo, pageSize, email);
+        List<ScheduleDTO> listSchedule = page.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -63,7 +63,7 @@ public class MasterPageController {
 //TODO chek bag with delete (cant delete in cause of foreign key)
     @GetMapping("/master/page/myMasterpage/{id}")
     public String deleteScheduleByEmail(@PathVariable("id") Long id) {
-        ScheduleDto scheduleDto = ScheduleDto.builder().
+        ScheduleDTO scheduleDto = ScheduleDTO.builder().
                 id(id).build();
         masterScheduleInterface.deleteScheduleDayById(scheduleDto);
         return "redirect:/master/myPages";
@@ -71,28 +71,28 @@ public class MasterPageController {
 
     @GetMapping("/master/setDone/firstHour/{sheduleId}")
     public String setDoneFirstHour(@PathVariable(value = "sheduleId") Long scheduleId){
-        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        ScheduleDTO scheduleDto = ScheduleDTO.builder().id(scheduleId).build();
         masterScheduleInterface.setAsDoneFirstHour(scheduleDto);
         return "redirect:/master/myPages";
     }
 
     @GetMapping("/master/setDone/secondHour/{sheduleId}")
     public String setDoneSecondHour(@PathVariable(value = "sheduleId") Long scheduleId){
-        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        ScheduleDTO scheduleDto = ScheduleDTO.builder().id(scheduleId).build();
         masterScheduleInterface.setAsDoneSecondHour(scheduleDto);
         return "redirect:/master/myPages";
     }
 
     @GetMapping("/master/setDone/thirdHour/{sheduleId}")
     public String setDoneThirdHour(@PathVariable(value = "sheduleId") Long scheduleId){
-        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        ScheduleDTO scheduleDto = ScheduleDTO.builder().id(scheduleId).build();
         masterScheduleInterface.setAsDoneThirdHour(scheduleDto);
         return "redirect:/master/myPages";
     }
 
     @GetMapping("/master/setDone/forthHour/{sheduleId}")
     public String setDoneForthHour(@PathVariable(value = "sheduleId") Long scheduleId){
-        ScheduleDto scheduleDto = new ScheduleDto().builder().id(scheduleId).build();
+        ScheduleDTO scheduleDto = ScheduleDTO.builder().id(scheduleId).build();
         masterScheduleInterface.setAsDoneForthHour(scheduleDto);
         return "redirect:/master/myPages";
     }

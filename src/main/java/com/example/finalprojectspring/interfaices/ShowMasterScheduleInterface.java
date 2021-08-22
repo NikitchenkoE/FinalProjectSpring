@@ -1,18 +1,18 @@
 package com.example.finalprojectspring.interfaices;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import org.springframework.data.domain.Page;
 
 public interface ShowMasterScheduleInterface {
-    Page<ScheduleDto> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail);
+    Page<ScheduleDTO> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail);
 
-    void deleteScheduleDayById(ScheduleDto scheduleDto);
+    void deleteScheduleDayById(ScheduleDTO scheduleDto);
 
-    boolean setAsDoneFirstHour(ScheduleDto scheduleDto);
+    boolean setAsDoneFirstHour(ScheduleDTO scheduleDto);
 
-    boolean setAsDoneSecondHour(ScheduleDto scheduleDto);
+    boolean setAsDoneSecondHour(ScheduleDTO scheduleDto);
 
-    boolean setAsDoneThirdHour(ScheduleDto scheduleDto);
+    boolean setAsDoneThirdHour(ScheduleDTO scheduleDto);
 
-    boolean setAsDoneForthHour(ScheduleDto scheduleDto);
+    boolean setAsDoneForthHour(ScheduleDTO scheduleDto);
 }

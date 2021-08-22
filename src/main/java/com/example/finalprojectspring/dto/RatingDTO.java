@@ -1,9 +1,6 @@
 package com.example.finalprojectspring.dto;
 
-import com.example.finalprojectspring.entities.Rating;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,10 +1,12 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import com.example.finalprojectspring.entities.ScheduleEntity;
+import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.ShowMasterScheduleInterface;
 import com.example.finalprojectspring.mailService.EmailInterface;
 import com.example.finalprojectspring.repository.ScheduleRepository;
+import com.example.finalprojectspring.repository.UserRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,30 +28,35 @@ import java.util.stream.Collectors;
 public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     private final ScheduleRepository scheduleRepository;
     private final EmailInterface emailInterface;
+    private final UserRepository userRepository;
+
 
     @Autowired
-    public ShowMasterSchedule(ScheduleRepository scheduleRepository, EmailInterface emailInterface) {
+    public ShowMasterSchedule(ScheduleRepository scheduleRepository, EmailInterface emailInterface, UserRepository userRepository) {
         this.scheduleRepository = scheduleRepository;
         this.emailInterface = emailInterface;
+        this.userRepository = userRepository;
     }
 
-    public Page<ScheduleDto> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail) {
+    public Page<ScheduleDTO> findPaginatedMasterSchedule(int pageNo, int pageSize, String masterEmail) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<ScheduleEntity> scheduleEntityPage = this.scheduleRepository.findAllByMasterEmail(masterEmail, pageable);
-        Page<ScheduleDto> sorted = new PageImpl<>(scheduleEntityPage.stream()
+        return new PageImpl<>(scheduleEntityPage.stream()
                 .map(this::scheduleEntityToScheduleDto)
                 .collect(Collectors.toList()), pageable, scheduleEntityPage.getTotalElements());
-        return sorted;
     }
 
     @Transactional
-    public void deleteScheduleDayById(ScheduleDto scheduleDto){
-        scheduleRepository.removeByID(scheduleDto.getId());
-
+    public void deleteScheduleDayById(ScheduleDTO scheduleDto){
+        ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
+        UserEntity userEntityWithNeSchedule = userRepository.findByEmail(scheduleEntity.getMasterEmail());
+        userEntityWithNeSchedule.getSchedule().remove(scheduleEntity);
+        userRepository.save(userEntityWithNeSchedule);
+        scheduleRepository.delete(scheduleEntity);
     }
 
     @Transactional
-    public boolean setAsDoneFirstHour(ScheduleDto scheduleDto){
+    public boolean setAsDoneFirstHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setFirstHour(true);
@@ -61,7 +68,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     }
 
     @Transactional
-    public boolean setAsDoneSecondHour(ScheduleDto scheduleDto){
+    public boolean setAsDoneSecondHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setSecondHour(true);
@@ -73,7 +80,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     }
 
     @Transactional
-    public boolean setAsDoneThirdHour(ScheduleDto scheduleDto){
+    public boolean setAsDoneThirdHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setThirdHour(true);
@@ -85,7 +92,7 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     }
 
     @Transactional
-    public boolean setAsDoneForthHour(ScheduleDto scheduleDto){
+    public boolean setAsDoneForthHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
         scheduleEntity.setForthHour(true);
@@ -98,13 +105,13 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
 
 
 
-    private ScheduleDto scheduleEntityToScheduleDto (ScheduleEntity scheduleEntity){
+    private ScheduleDTO scheduleEntityToScheduleDto (ScheduleEntity scheduleEntity){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
                 .withLocale(Locale.UK)
                 .withZone(ZoneId.systemDefault());
         Timestamp timestamp = scheduleEntity.getWorkDay();
         String timeStampToString = dateTimeFormatter.format(timestamp.toInstant());
-        ScheduleDto scheduleDto = new ScheduleDto().builder()
+        return new ScheduleDTO().builder()
                 .id(scheduleEntity.getID())
                 .masterEmail(scheduleEntity.getMasterEmail())
                 .workDay(timeStampToString)
@@ -117,7 +124,6 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
                 .thirdHour(scheduleEntity.getThirdHour())
                 .forthHour(scheduleEntity.getForthHour())
                 .build();
-        return scheduleDto;
     }
 }
 

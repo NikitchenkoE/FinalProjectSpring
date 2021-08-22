@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.ScheduleDto;
+import com.example.finalprojectspring.dto.ScheduleDTO;
 import com.example.finalprojectspring.entities.ScheduleEntity;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.SetScheduleToMasterServiceInterface;
@@ -33,7 +33,7 @@ public class SetScheduleToMasterService implements SetScheduleToMasterServiceInt
     }
 
     @Transactional
-    public boolean setWorkDayToMaster(ScheduleDto scheduleDto) throws ParseException {
+    public boolean setWorkDayToMaster(ScheduleDTO scheduleDto) throws ParseException {
         log.info("added date");
         UserEntity userEntity = userRepository.findByEmail(scheduleDto.getMasterEmail());
         userEntity.getSchedule().add(convertToScheduleEntity(scheduleDto));
@@ -42,7 +42,7 @@ public class SetScheduleToMasterService implements SetScheduleToMasterServiceInt
     }
 
 
-    public boolean dateToMasterPresentInDb(ScheduleDto scheduleDto) throws ParseException {
+    public boolean dateToMasterPresentInDb(ScheduleDTO scheduleDto) throws ParseException {
         Optional<List<ScheduleEntity>> scheduleEntity =
                 Optional.ofNullable(scheduleRepository.findAllByMasterEmail(scheduleDto.getMasterEmail()));
         if (!scheduleEntity.isPresent()) {
@@ -61,11 +61,11 @@ public class SetScheduleToMasterService implements SetScheduleToMasterServiceInt
     }
 
 
-    public ScheduleEntity convertToScheduleEntity(ScheduleDto scheduleDto) throws ParseException {
+    public ScheduleEntity convertToScheduleEntity(ScheduleDTO scheduleDto) throws ParseException {
         String dateDto = scheduleDto.getWorkDay();
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateDto);
         Timestamp timestamp = new Timestamp(date.getTime());
-        ScheduleEntity scheduleEntity = new ScheduleEntity().builder()
+        return ScheduleEntity.builder()
                 .workDay(timestamp)
                 .masterEmail(scheduleDto.getMasterEmail())
                 .firstHour(scheduleDto.getFirstHour())
@@ -73,7 +73,6 @@ public class SetScheduleToMasterService implements SetScheduleToMasterServiceInt
                 .thirdHour(scheduleDto.getThirdHour())
                 .forthHour(scheduleDto.getForthHour())
                 .build();
-        return scheduleEntity;
     }
 
 

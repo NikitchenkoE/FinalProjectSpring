@@ -1,13 +1,14 @@
 package com.example.finalprojectspring.dto;
 
-import com.example.finalprojectspring.entities.Rating;
 import com.example.finalprojectspring.entities.Role_Of_Users;
 import com.example.finalprojectspring.validation.ValidPassword;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.*;
-import java.util.List;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter

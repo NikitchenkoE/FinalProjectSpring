@@ -13,10 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 @Builder
-public class MasterOcupationEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class MasterOcupationEntity extends BaseEntity{
+
 
     @OneToOne(mappedBy = "occupation", cascade = CascadeType.ALL)
     private UserEntity userEntity;

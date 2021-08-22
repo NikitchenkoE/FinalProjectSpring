@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Service
 public class UserPrincipalsDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserPrincipalsDetailsService(UserRepository userRepository) {

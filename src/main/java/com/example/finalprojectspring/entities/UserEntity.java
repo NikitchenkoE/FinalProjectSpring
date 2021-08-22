@@ -3,6 +3,7 @@ package com.example.finalprojectspring.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,10 +17,8 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usr",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long ID;
+public class UserEntity extends BaseEntity {
+
 
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -43,13 +42,13 @@ public class UserEntity {
     @JoinColumn(name = "occupation_id")
     private MasterOcupationEntity occupation;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    List<ScheduleEntity> schedule;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScheduleEntity> schedule = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<Rating> ratings;
+    private List<Rating> ratings = new ArrayList<>();
 
     @Column(name = "money", nullable = false, length = 20)
-    private double money;
+    private Double money;
 
 }

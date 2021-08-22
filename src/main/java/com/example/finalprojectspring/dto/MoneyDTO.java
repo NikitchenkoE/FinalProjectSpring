@@ -1,14 +1,9 @@
 package com.example.finalprojectspring.dto;
 
 import com.example.finalprojectspring.entities.Role_Of_Users;
-import com.example.finalprojectspring.validation.ValidPassword;
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -17,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-public class UserEntityDtoMoney {
+public class MoneyDTO {
 
     private String email;
 

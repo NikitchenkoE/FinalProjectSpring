@@ -2,14 +2,12 @@ package com.example.finalprojectspring.service;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.UserEntity;
-import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IRegistrationInterf;
 import com.example.finalprojectspring.repository.UserRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -28,7 +26,7 @@ public class RegistrationService implements IRegistrationInterf {
     @Override
     public UserEntity addUserToDataBase(UserEntityDTO userEntityDTO) {
         log.info("Added new user");
-        UserEntity userEntity = new UserEntity().builder()
+        UserEntity userEntity = UserEntity.builder()
                 .email(userEntityDTO.getEmail())
                 .password(passwordEncoder.encode(userEntityDTO.getPassword()))
                 .firstName(userEntityDTO.getFirstName())
