@@ -1,16 +1,19 @@
 package com.example.finalprojectspring.service;
 
-import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.dto.UserEntityDtoMoney;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.NotEnoughMoneyException;
+import com.example.finalprojectspring.interfaices.MoneyServiceInterface;
 import com.example.finalprojectspring.repository.UserRepository;
+import com.sun.tools.javac.util.Log;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MoneyService implements  MoneyServiceInterface {
+@Log4j
+public class MoneyService implements MoneyServiceInterface {
     private final UserRepository userRepository;
 
     @Autowired
@@ -22,6 +25,7 @@ public class MoneyService implements  MoneyServiceInterface {
     @Override
     @Transactional
     public boolean replenishMoneyAccount(UserEntityDtoMoney userEntityDtoMoney){
+        log.info("Added money to account " + userEntityDtoMoney.getEmail());
         UserEntity userEntity = userRepository.findByEmail(userEntityDtoMoney.getEmail());
         userEntity.setMoney(userEntity.getMoney() + userEntityDtoMoney.getMoney());
         userRepository.save(userEntity);
@@ -41,6 +45,7 @@ public class MoneyService implements  MoneyServiceInterface {
             userReceiver.setMoney(userReceiver.getMoney() + sum);
             userRepository.save(userSender);
             userRepository.save(userReceiver);
+            log.info("money sent from " + receiverEmail + " to " + senderEmail);
             return true;
         }
     }
