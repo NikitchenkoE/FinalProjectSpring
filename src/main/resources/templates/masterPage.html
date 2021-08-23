@@ -70,7 +70,7 @@
 
 <div class="container text-center" size="1000px">
 
-    <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
+    <h2 class="align-self-center" th:text="#{message.schedules}"></h2>
 
     <div th:switch="${listMasterSchedule}">
         <h2 th:case="null">No schedule found</h2>
@@ -95,7 +95,7 @@
                            th:text="#{message.disable}"
                            th:href="@{'/master/setDone/firstHour/' + ${master.id}}">Mark As Done</a>
                         <a sec:authorize="hasRole('ADMIN')" th:unless="${master.firstHour.booleanValue()}"
-                           th:href="@{'/admin/changeFirstHour/' + ${master.id}}">Change time</a>
+                           th:href="@{'/admin/changeFirstHour/' + ${master.id}}" th:text="#{message.changeTime}">Change time</a>
                     </td>
                     <td>
                         <p th:if="${master.secondHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
@@ -103,7 +103,7 @@
                            th:text="#{message.disable}"
                            th:href="@{'/master/setDone/secondHour/' + ${master.id}}">Mark As Done</a>
                         <a sec:authorize="hasRole('ADMIN')" th:unless="${master.secondHour.booleanValue()}"
-                           th:href="@{'/admin/changeSecondHour/' + ${master.id}}">Change time</a>
+                           th:href="@{'/admin/changeSecondHour/' + ${master.id}}" th:text="#{message.changeTime}">Change time</a>
                     </td>
                     <td>
                         <p th:if="${master.thirdHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
@@ -111,7 +111,7 @@
                            th:text="#{message.disable}"
                            th:href="@{'/master/setDone/thirdHour/' + ${master.id}}">Mark As Done</a>
                         <a sec:authorize="hasRole('ADMIN')" th:unless="${master.thirdHour.booleanValue()}"
-                           th:href="@{'/admin/changeThirdHour/' + ${master.id}}">Change time</a>
+                           th:href="@{'/admin/changeThirdHour/' + ${master.id}}" th:text="#{message.changeTime}">Change time</a>
                     </td>
                     <td>
                         <p th:if="${master.forthHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
@@ -119,7 +119,7 @@
                            th:text="#{message.disable}"
                            th:href="@{'/master/setDone/forthHour/' + ${master.id}}">Mark As Done</a>
                         <a sec:authorize="hasRole('ADMIN')" th:unless="${master.forthHour.booleanValue()}"
-                           th:href="@{'/admin/changeForthHour/' + ${master.id}}">Change time</a>
+                           th:href="@{'/admin/changeForthHour/' + ${master.id}}" th:text="#{message.changeTime}">Change time</a>
                     </td>
 
                     <td>
