@@ -59,11 +59,14 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     public boolean setAsDoneFirstHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setFirstHour(true);
-        scheduleRepository.save(scheduleEntity);
+
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailFirstHour(),
                 "Mark",
                 "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
+
+        scheduleEntity.setFirstHour(true);
+        scheduleEntity.setClientEmailFirstHour(null);
+        scheduleRepository.save(scheduleEntity);
         return true;
     }
 
@@ -71,11 +74,14 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     public boolean setAsDoneSecondHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setSecondHour(true);
-        scheduleRepository.save(scheduleEntity);
+
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailSecondHour(),
                 "Mark",
                 "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
+
+        scheduleEntity.setSecondHour(true);
+        scheduleEntity.setClientEmailSecondHour(null);
+        scheduleRepository.save(scheduleEntity);
         return true;
     }
 
@@ -83,11 +89,14 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     public boolean setAsDoneThirdHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setThirdHour(true);
-        scheduleRepository.save(scheduleEntity);
+
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailThirdHour(),
                 "Mark",
                 "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
+
+        scheduleEntity.setThirdHour(true);
+        scheduleEntity.setClientEmailThirdHour(null);
+        scheduleRepository.save(scheduleEntity);
         return true;
     }
 
@@ -95,11 +104,14 @@ public class ShowMasterSchedule implements ShowMasterScheduleInterface {
     public boolean setAsDoneForthHour(ScheduleDTO scheduleDto){
         log.info("First hour set as done");
         ScheduleEntity scheduleEntity = scheduleRepository.findByID(scheduleDto.getId());
-        scheduleEntity.setForthHour(true);
-        scheduleRepository.save(scheduleEntity);
+
         emailInterface.sendSimpleMessage(scheduleEntity.getClientEmailForthHour(),
                 "Mark",
                 "http://localhost:8080/user/ratingMaster/"+scheduleEntity.getMasterEmail());
+
+        scheduleEntity.setForthHour(true);
+        scheduleEntity.setClientEmailForthHour(null);
+        scheduleRepository.save(scheduleEntity);
         return true;
     }
 
