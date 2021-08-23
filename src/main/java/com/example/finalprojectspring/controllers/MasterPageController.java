@@ -60,7 +60,7 @@ public class MasterPageController {
         model.addAttribute("listMasterSchedule", listSchedule);
         return "masterPage";
     }
-//TODO chek bag with delete (cant delete in cause of foreign key)
+
     @GetMapping("/master/page/myMasterpage/{id}")
     public String deleteScheduleByEmail(@PathVariable("id") Long id) {
         ScheduleDTO scheduleDto = ScheduleDTO.builder().
