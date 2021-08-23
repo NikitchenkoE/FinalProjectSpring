@@ -53,8 +53,8 @@
             </ul>
 
             <div class="col-form-label">
-                <!--        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=ua">UA </a></button>-->
-                <!--        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/main?lang=en">EN</a></button>-->
+                        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/errorNotEnougMoney?lang=ua">UA </a></button>
+                        <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/errorNotEnougMoney?lang=en">EN</a></button>
                 <button sec:authorize="isAnonymous()"
                         class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
                     <a class="col-form-label" href="#" th:text="#{message.login}" th:href="@{~/login}"><i
@@ -73,10 +73,9 @@
 </div>
 
 <div class="container text-center" size="1000px">
-    <h2 class="align-self-center">
-        There are not enough funds in the account. Top up your account for at least UAH 500. Top up account:  <a href="/user/page/myUserPage">My page</a> </h2>
-    <h2 class="align-self-center">
-        На рахунку недостатньо коштів. Поповніть рахунок мінімум на 500 грн. Поповнити рахунок:  <a href="/user/page/myUserPage">Моя сторінка</a></h2>
+    <h2 class="align-self-center" th:text="#{message.notEnoughMoney}">
+        There are not enough funds in the account. Top up your account for at least UAH 500.</h2>
+
 </div>
 
 
