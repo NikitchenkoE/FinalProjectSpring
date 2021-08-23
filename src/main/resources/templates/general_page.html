@@ -47,7 +47,19 @@
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="hasRole('MASTER')" href="#" th:text="#{message.myPage}"
                        th:href="@{~/master/page/myMasterpage}"><i
-                            class="fa fa-home"></i>Admin</a>
+                            class="fa fa-home"></i>Master Page</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('USER')"  th:text="#{message.show.userPage}"
+                       th:href="@{~/user/page/myUserPage}"><i
+                            class="fa fa-home"></i>User Page</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')"  th:text="#{message.show.userPage}"
+                       th:href="@{~/user/page/myUserPage}"><i
+                            class="fa fa-home"></i>User Page</a>
                 </li>
 
             </ul>

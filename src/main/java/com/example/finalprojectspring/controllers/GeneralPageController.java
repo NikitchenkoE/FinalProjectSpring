@@ -1,7 +1,6 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
-import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IGeneraPageService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +42,11 @@ public class GeneralPageController {
 
     @GetMapping("/generalpage/{pageNomber}")
     public String findPaginated(@PathVariable(value = "pageNomber") int pageNomber, Model model, @RequestParam(required = false, name = "occupationFilter")
-            String occupationFilter, @RequestParam(value = "sortField",required = false) String sortField, @RequestParam(value = "sortDir",required = false) String sortDir) {
+            String occupationFilter, @RequestParam(value = "sortField", required = false) String sortField, @RequestParam(value = "sortDir", required = false) String sortDir) {
         int pageSize = 5;
         Page<UserEntityDTO> page;
 
-        if (sortField==null){
+        if (sortField == null) {
             sortField = "firstName";
             sortDir = "asc";
         }
@@ -76,23 +75,11 @@ public class GeneralPageController {
         return "general_page";
     }
 
-
     @RequestMapping("/login")
     public String loginPage() {
         log.info("Showed login page");
         return "login_page";
     }
-
-    @RequestMapping("/user")
-    public String userPage() {
-        return "user_page";
-    }
-
-
-//    @RequestMapping("/master")
-//    public String masterPage() {
-//        return "master_page";
-//    }
 
 
 }
