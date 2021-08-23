@@ -1,7 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
-import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.RoleOfUsers;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
 import lombok.extern.log4j.Log4j;
@@ -104,7 +104,7 @@ public class AdminPageController {
             return "addMasterPage";
         }
 
-        master.setRoles(Collections.singleton(Role_Of_Users.ROLE_MASTER));
+        master.setRoles(Collections.singleton(RoleOfUsers.ROLE_MASTER));
         master.setMoney(0.0);
         iAdminPageService.createNewMaster(master);
 

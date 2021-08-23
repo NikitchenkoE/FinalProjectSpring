@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.dto;
 
-import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.RoleOfUsers;
 import lombok.*;
 
 import javax.validation.constraints.DecimalMin;
@@ -20,7 +20,7 @@ public class MoneyDTO {
 
     private String lastName;
 
-    private Set<Role_Of_Users> roles;
+    private Set<RoleOfUsers> roles;
 
     private String occupation;
 

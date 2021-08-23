@@ -1,6 +1,6 @@
 package com.example.finalprojectspring.dto;
 
-import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.RoleOfUsers;
 import com.example.finalprojectspring.validation.ValidPassword;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -36,7 +36,7 @@ public class UserEntityDTO {
     @Size(min = 2, max = 30)
     private String lastName;
 
-    private Set<Role_Of_Users> roles;
+    private Set<RoleOfUsers> roles;
 
     @NotNull
     private String occupation;

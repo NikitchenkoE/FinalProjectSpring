@@ -33,10 +33,10 @@ public class UserEntity extends BaseEntity {
     private String lastName;
 
     @Column(name = "user_role")
-    @ElementCollection(targetClass = Role_Of_Users.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = RoleOfUsers.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role_Of_Users> roles;
+    private Set<RoleOfUsers> roles;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "occupation_id")

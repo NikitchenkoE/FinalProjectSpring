@@ -2,7 +2,7 @@ package com.example.finalprojectspring.service;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
 import com.example.finalprojectspring.entities.MasterOcupationEntity;
-import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.RoleOfUsers;
 import com.example.finalprojectspring.entities.UserEntity;
 import com.example.finalprojectspring.exeption.ApiRequestExeption;
 import com.example.finalprojectspring.interfaices.IAdminPageService;
@@ -69,12 +69,12 @@ public class AdminPageService implements IAdminPageService {
 
     public Page<UserEntity> findPaginatedMaster(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_MASTER, pageable);
+        return this.userRepository.findAllByRoles(RoleOfUsers.ROLE_MASTER, pageable);
     }
 
     public Page<UserEntity> findPaginatedUser(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.userRepository.findAllByRoles(Role_Of_Users.ROLE_USER, pageable);
+        return this.userRepository.findAllByRoles(RoleOfUsers.ROLE_USER, pageable);
     }
 
 

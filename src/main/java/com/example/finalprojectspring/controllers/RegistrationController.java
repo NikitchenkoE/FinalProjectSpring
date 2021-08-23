@@ -1,7 +1,7 @@
 package com.example.finalprojectspring.controllers;
 
 import com.example.finalprojectspring.dto.UserEntityDTO;
-import com.example.finalprojectspring.entities.Role_Of_Users;
+import com.example.finalprojectspring.entities.RoleOfUsers;
 import com.example.finalprojectspring.interfaices.IRegistrationInterf;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class RegistrationController {
             return "reg_form_page";
         }
 
-        user.setRoles(Collections.singleton(Role_Of_Users.ROLE_USER));
+        user.setRoles(Collections.singleton(RoleOfUsers.ROLE_USER));
         user.setMoney(0);
         iRegistrationInterf.addUserToDataBase(user);
 
