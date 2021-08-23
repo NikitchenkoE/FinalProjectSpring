@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Master Page</title>
+    <title>Change Time</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -47,9 +47,9 @@
             </ul>
 
             <div class="col-form-label">
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/master/myPages?lang=ua">UA </a>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/user/signUpPage?lang=ua">UA </a>
                 </button>
-                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/master/myPages?lang=en">EN</a>
+                <button class="btn btn-outline-info my-2 my-sm-0 btn-sm"><a href="/user/signUpPage?lang=en">EN</a>
                 </button>
                 <button sec:authorize="isAnonymous()"
                         class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">
@@ -67,10 +67,9 @@
         </div>
     </nav>
 </div>
-
 <div class="container text-center" size="1000px">
 
-    <h2 class="align-self-center" th:text="#{message.input.tableName.Master }"></h2>
+    <h2 class="align-self-center" th:text="#{message.SignUpPage}"></h2>
 
     <div th:switch="${listMasterSchedule}">
         <h2 th:case="null">No schedule found</h2>
@@ -83,48 +82,36 @@
                     <th>11:30 - 12:30</th>
                     <th>13:00 - 14:30</th>
                     <th>15:00 - 16:30</th>
-                    <th th:text="#{message.input.action}">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="master : ${listMasterSchedule}">
                     <td th:text="${master.workDay}"></td>
                     <td>
-                        <p th:if="${master.firstHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a sec:authorize="hasRole('MASTER')" th:unless="${master.firstHour.booleanValue()}"
-                           th:text="#{message.disable}"
-                           th:href="@{'/master/setDone/firstHour/' + ${master.id}}">Mark As Done</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:unless="${master.firstHour.booleanValue()}"
-                           th:href="@{'/admin/changeFirstHour/' + ${master.id}}">Change time</a>
+                        <a th:unless="${master.firstHour.booleanValue()}" th:text="#{message.booked}">
+                            Booked</a>
+                        <a th:href="@{'/admin/signUp/firstHour/' + ${master.id}}">
+                            <p th:if="${master.firstHour.booleanValue()}" th:text="#{message.enableToSignUp}">Enable</p>
+                        </a>
                     </td>
                     <td>
-                        <p th:if="${master.secondHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a sec:authorize="hasRole('MASTER')" th:unless="${master.secondHour.booleanValue()}"
-                           th:text="#{message.disable}"
-                           th:href="@{'/master/setDone/secondHour/' + ${master.id}}">Mark As Done</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:unless="${master.secondHour.booleanValue()}"
-                           th:href="@{'/admin/changeSecondHour/' + ${master.id}}">Change time</a>
+                        <a th:unless="${master.secondHour.booleanValue()}" th:text="#{message.booked}">Booked</a>
+                        <a th:href="@{'/admin/signUp/secondHour/' + ${master.id}}">
+                            <p th:if="${master.secondHour.booleanValue()}" th:text="#{message.enableToSignUp}">
+                                Enable</p>
+                        </a>
                     </td>
                     <td>
-                        <p th:if="${master.thirdHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a sec:authorize="hasRole('MASTER')" th:unless="${master.thirdHour.booleanValue()}"
-                           th:text="#{message.disable}"
-                           th:href="@{'/master/setDone/thirdHour/' + ${master.id}}">Mark As Done</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:unless="${master.thirdHour.booleanValue()}"
-                           th:href="@{'/admin/changeThirdHour/' + ${master.id}}">Change time</a>
+                        <a th:unless="${master.thirdHour.booleanValue()}" th:text="#{message.booked}">Booked</a>
+                        <a th:href="@{'/admin/signUp/thirdHour/' + ${master.id}}">
+                            <p th:if="${master.thirdHour.booleanValue()}" th:text="#{message.enableToSignUp}">Enable</p>
+                        </a>
                     </td>
                     <td>
-                        <p th:if="${master.forthHour.booleanValue()}" th:text="#{message.enable}">Enable</p>
-                        <a sec:authorize="hasRole('MASTER')" th:unless="${master.forthHour.booleanValue()}"
-                           th:text="#{message.disable}"
-                           th:href="@{'/master/setDone/forthHour/' + ${master.id}}">Mark As Done</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:unless="${master.forthHour.booleanValue()}"
-                           th:href="@{'/admin/changeForthHour/' + ${master.id}}">Change time</a>
-                    </td>
-
-                    <td>
-                        <a th:href="@{'/master/page/myMasterpage/' + ${master.id}}"
-                           th:text="#{message.input.delete}"> </a>
+                        <p th:unless="${master.forthHour.booleanValue()}" th:text="#{message.booked}">Booked</p>
+                        <a th:href="@{'/admin/signUp/forthHour/' + ${master.id}}">
+                            <p th:if="${master.forthHour.booleanValue()}" th:text="#{message.enableToSignUp}">Enable</p>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -155,7 +142,5 @@
 
     </div>
 </div>
-
-
 </body>
 </html>
